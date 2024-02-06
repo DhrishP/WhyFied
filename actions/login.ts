@@ -3,7 +3,7 @@
 import * as z from "zod";
 import { AuthError } from "next-auth";
 
-import { db } from "@/lib/db";
+import { prisma } from "@/lib/prisma";
 import { signIn } from "@/auth";
 import { LoginSchema } from "@/schemas";
 import { getUserByEmail } from "@/data/user";
@@ -72,7 +72,7 @@ export const login = async (
         return { error: "Code expired!" };
       }
 
-      await db.twoFactorToken.delete({
+      await prisma.twoFactorToken.delete({
         where: { id: twoFactorToken.id }
       });
 
@@ -81,12 +81,12 @@ export const login = async (
       );
 
       if (existingConfirmation) {
-        await db.twoFactorConfirmation.delete({
+        await prisma.twoFactorConfirmation.delete({
           where: { id: existingConfirmation.id }
         });
       }
 
-      await db.twoFactorConfirmation.create({
+      await prisma.twoFactorConfirmation.create({
         data: {
           userId: existingUser.id,
         }

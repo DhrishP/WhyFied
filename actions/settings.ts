@@ -4,7 +4,7 @@ import * as z from "zod";
 import bcrypt from "bcryptjs";
 
 import { update } from "@/auth";
-import { db } from "@/lib/db";
+import { prisma } from "@/lib/prisma";
 import { SettingsSchema } from "@/schemas";
 import { getUserByEmail, getUserById } from "@/data/user";
 import { currentUser } from "@/lib/auth";
@@ -20,9 +20,9 @@ export const settings = async (
     return { error: "Unauthorized" }
   }
 
-  const dbUser = await getUserById(user.id);
+  const prismaUser = await getUserById(user.id);
 
-  if (!dbUser) {
+  if (!prismaUser) {
     return { error: "Unauthorized" }
   }
 
@@ -51,10 +51,10 @@ export const settings = async (
     return { success: "Verification email sent!" };
   }
 
-  if (values.password && values.newPassword && dbUser.password) {
+  if (values.password && values.newPassword && prismaUser.password) {
     const passwordsMatch = await bcrypt.compare(
       values.password,
-      dbUser.password,
+      prismaUser.password,
     );
 
     if (!passwordsMatch) {
@@ -69,8 +69,8 @@ export const settings = async (
     values.newPassword = undefined;
   }
 
-  const updatedUser = await db.user.update({
-    where: { id: dbUser.id },
+  const updatedUser = await prisma.user.update({
+    where: { id: prismaUser.id },
     data: {
       ...values,
     }
