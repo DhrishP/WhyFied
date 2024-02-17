@@ -17,36 +17,35 @@ const testPrompt = async (prompt: string) => {
       input: input,
     });
     const [{ embedding }] = fetchEmbedding.data;
-    console.log("reached embedding");
+    console.log(embedding);
     let { data, error } = await supabaseAdmin.rpc("chunk_fetcher", {
-      match_count: 2,
-      similarity_threshold: 0.02,
+      match_count: 1,
+      similarity_threshold: 0.01,
       query_embedding: embedding,
     });
-    console.log("Chunks data---", data);
     if (!data || error) {
       console.log("error", error);
       return null;
     }
+    console.log(data);
+    const searchPrompt = `  Use the following passages to understand context of the philosopher and answer the query "${prompt}" based on it
+    the passages are:${data?.map((d: any) => d.work_content).join("\n\n")} in first person perspective as you are marcus aerulius the great stoic philosopher.`;
 
-    const searchPrompt = `  Use the following passages to provide an answer to the query: "${prompt}"
-     ${data?.map((d: any) => d.work_content).join("\n\n")} `;
-    console.log("Search Prompt", searchPrompt);
-    // const response = await openai.chat.completions.create({
-    //   model: "gpt-3.5-turbo-16k-0613",
-    //   messages: [
-    //     {
-    //       role: "system",
-    //       content:
-    //         "You are a philosophy guide and help people understand one's input by adding different perspectives and insights based on context of the philosopher.",
-    //     },
-    //     { role: "user", content: searchPrompt },
-    //   ],
-    //   temperature: 0.2,
-    //   max_tokens: 150,
-    //   stream: false,
-    // });
-    // console.log("Answer", response.choices[0].message.content);
+    const response = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo-16k-0613",
+      messages: [
+        {
+          role: "system",
+          content:
+            'You are marcus aerulius the great stoic philosopher who talks in "first person perspective", you give various perspectives of a asked question based on your philosophy. answer like you are marcus aerulius . the response should be concise and to the point with different perspectives. keep your response under 200 words , remember to talk in first person perspective',
+        },
+        { role: "user", content: searchPrompt },
+      ],
+      temperature: 0.1,
+      max_tokens: 240,
+      stream: false,
+    });
+    console.log("\nAnswer\n", response.choices[0].message.content);
   } catch (error) {
     console.log("Error", error);
   }
@@ -54,6 +53,6 @@ const testPrompt = async (prompt: string) => {
 
 (async () => {
   await testPrompt(
-    "what is the happiness according to marcus aerelius philosophy?"
+    "what was our previous conversation about?"
   );
 })();
