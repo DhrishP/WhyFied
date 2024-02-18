@@ -81,3 +81,8 @@ model TwoFactorConfirmation {
 
   @@unique([userId])
 }
+
+model registeredEmail {
+  id      String   @id @default(cuid())
+  email   String   @unique
+}
