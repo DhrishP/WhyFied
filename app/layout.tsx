@@ -5,7 +5,7 @@ import { auth } from "@/auth";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
-const inter = Inter({ subsets: ["latin"] });
+
 const rajdhani = Rajdhani({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],

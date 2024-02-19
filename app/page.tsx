@@ -1,6 +1,5 @@
 "use client";
 import { Poppins } from "next/font/google";
-import { motion } from "framer-motion";
 import NeoButton from "@/components/ui/neo-brutalist/button";
 import { useState, useTransition } from "react";
 import { toast } from "sonner";
