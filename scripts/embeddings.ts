@@ -39,7 +39,7 @@ const createEmbedding = async (
         work_title: title,
         work_author: author,
         work_content: content,
-        work_references: "Understanding Objectivism:A Guide to Learning Ayn Rand's Philosophy by Leonard Peikoff.",
+        work_references: "Bhagavad Gita as It is by A.C. Bhaktivedanta Swami Prabhupada.",
         embeddings: embedding1,
       })
       .select("*");
@@ -60,7 +60,7 @@ const createEmbedding = async (
         work_title: title,
         work_author: author,
         work_content: content,
-        work_references: "Understanding Objectivism:A Guide to Learning Ayn Rand's Philosophy by Leonard Peikoff.",
+        work_references: "Bhagavad Gita as It is by A.C. Bhaktivedanta Swami Prabhupada.",
         embeddings: embedding2,
       })
       .select("*");
@@ -84,7 +84,7 @@ const createEmbedding = async (
       work_title: title,
       work_author: author,
       work_content: content,
-      work_references: "Understanding Objectivism:A Guide to Learning Ayn Rand's Philosophy by Leonard Peikoff.",
+      work_references: "Bhagavad Gita as It is by A.C. Bhaktivedanta Swami Prabhupada.",
       embeddings: embedding,
     })
     .select("*");
@@ -96,7 +96,7 @@ const createEmbedding = async (
 };
 
 export const createEmbeddings = async () => {
-  const loader = new PDFLoader("public/docs/ayn_rand.pdf", {
+  const loader = new PDFLoader("public/docs/bhagavad.pdf", {
     parsedItemSeparator: "",
     splitPages: false,
   });
@@ -110,8 +110,8 @@ export const createEmbeddings = async () => {
   const output = await splitter.createDocuments([docs[0].pageContent]);
   for (let i = 0; i < output.length; i++) {
     await createEmbedding(
-      "Understanding Objectivism by Ayn Rand",
-      "Ayn Rand",
+      "The life of purpose:Bhagavad Gita and the meaning of life",
+      "Saint Vyasa",
       output[i].pageContent,
       i
     );

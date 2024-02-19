@@ -39,7 +39,7 @@ const createEmbedding = async (
         work_title: title,
         work_author: author,
         work_content: content,
-        work_references: "Thus spoke Zarathustra by Friedrich Nietzsche.",
+        work_references: "What is it like to be a bat by Thomas Nagel.",
         embeddings: embedding1,
       })
       .select("*");
@@ -60,7 +60,7 @@ const createEmbedding = async (
         work_title: title,
         work_author: author,
         work_content: content,
-        work_references: "Beyond Good and Evil by Freidrich Nietzsche.",
+        work_references: "What is it like to be a bat by Thomas Nagel.",
         embeddings: embedding2,
       })
       .select("*");
@@ -84,7 +84,7 @@ const createEmbedding = async (
       work_title: title,
       work_author: author,
       work_content: content,
-      work_references: "Understanding Objectivism:A Guide to Learning Ayn Rand's Philosophy by Leonard Peikoff.",
+      work_references: "What is it like to be a bat by Thomas Nagel.",
       embeddings: embedding,
     })
     .select("*");
@@ -96,7 +96,7 @@ const createEmbedding = async (
 };
 
 export const createEmbeddings = async () => {
-  const loader = new PDFLoader("public/docs/ayn_rand2.pdf", {
+  const loader = new PDFLoader("public/docs/thomas2.pdf", {
     parsedItemSeparator: "",
     splitPages: false,
   });
@@ -110,8 +110,8 @@ export const createEmbeddings = async () => {
   const output = await splitter.createDocuments([docs[0].pageContent]);
   for (let i = 0; i < output.length; i++) {
     await createEmbedding(
-      "Anthem: A Manifesto for Individualistic Philosophy",
-      "Ayn Rand",
+      "How do we experience life in the perspective of a Bat",
+      "Thomas Nagel",
       output[i].pageContent,
       i
     );

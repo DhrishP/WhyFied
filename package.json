@@ -9,7 +9,7 @@
     "lint": "next lint",
     "postinstall": "prisma generate",
     "embeddings": "tsx scripts/embeddings.ts",
-    "embeddings2": "tsx scripts/embeddings2.ts",
+    "embeddings2": "tsx scripts/embedding2.ts",
     "prompt":"tsx scripts/prompt-test.ts"
   },
   "dependencies": {
