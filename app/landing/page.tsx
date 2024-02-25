@@ -1,15 +1,18 @@
 import React from "react";
 import Navbar from "@/components/landing-page/navbar";
 import Herobody from "@/components/landing-page/herobody";
-import AboutLanding from "@/components/landing-page/about";
-
+import About from "@/components/landing-page/about";
+import Testimonials from "@/components/landing-page/testimonials";
 
 function Page() {
   return (
     <>
-      <Navbar />
-      <Herobody />
-      <AboutLanding/>
+      <div className="bg-orange-100">
+        <Navbar />
+        <Herobody />
+        <About />
+        <Testimonials />
+      </div>
     </>
   );
 }
