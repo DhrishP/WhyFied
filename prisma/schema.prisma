@@ -23,8 +23,15 @@ model User {
   password              String?
   role                  UserRole               @default(USER)
   accounts              Account[]
+  coins                 Int                    @default(0)
+  dailyStreak           Int                    @default(0)
+  createdAt             DateTime               @default(now())
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
+  Achievement           Achievement[]
+  JournalEntries        JournalEntries[]
+  SmallWin              SmallWin[]
+  Preferences           Preferences[]
 }
 
 model Account {
@@ -83,6 +90,39 @@ model TwoFactorConfirmation {
 }
 
 model registeredEmail {
-  id      String   @id @default(cuid())
-  email   String   @unique
+  id    String @id @default(cuid())
+  email String @unique
+}
+
+model Achievement {
+  id       String  @id @default(cuid())
+  title    String
+  ImageUrl String?
+  points   Int
+  user     User    @relation(fields: [userId], references: [id])
+  userId   String
+}
+
+model JournalEntries {
+  id       String   @id @default(cuid())
+  question String
+  answer   String
+  date     DateTime @default(now())
+  user     User     @relation(fields: [userId], references: [id])
+  userId   String
+}
+
+model SmallWin {
+  id     String   @id @default(cuid())
+  win    String
+  date   DateTime @default(now())
+  user   User     @relation(fields: [userId], references: [id])
+  userId String
+}
+
+model Preferences {
+  id     String @id @default(cuid())
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+  genre  String
 }
