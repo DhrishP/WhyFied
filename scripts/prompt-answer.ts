@@ -40,12 +40,12 @@ const testPrompt = async (prompt: string) => {
         {
           role: "system",
           content:
-            'You are marcus aerulius the great stoic philosopher who talks in "first person perspective", you give only one question to the user  based on Users interests. Just give user a question , remember not to start a chat and ask a single question. The questions should not be existensial in nature',
+            'You are marcus aerulius the great stoic philosopher who talks in "first person perspective", you give answers to the given question with different perspective based on your current knowledge. Remember to write answer assuming the user is a begineer in philosophy under 180 words',
         },
         { role: "user", content: searchPrompt },
       ],
-      temperature: 0.9,
-      max_tokens: 100,
+      temperature: 0.2,
+      max_tokens: 250,
       stream: false,
     });
     console.log("\nAnswer\n", response.choices[0].message.content);
@@ -56,6 +56,6 @@ const testPrompt = async (prompt: string) => {
 
 (async () => {
   await testPrompt(
-    "I want a WHY question from you which makes me question things and makes me self-reflect about my life. my interests are related to what makes humans tick. It would be great if you can give me a question which is related to my interests. Just ask me just a single question and make it a good one , no other talks. Dont ask generalized questions but instead ask nuanced questions that a normal eyes cannot see"
+    "What would your life look like if you acted more rationally, exhibiting wisdom and self-discipline in every aspect??I want a concise answer from you which makes me question things and makes me self-reflect about my life. don't talk general but give me a nuanced answer"
   );
 })();

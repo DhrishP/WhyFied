@@ -1,4 +1,4 @@
-import { Resend } from "resend";
+
 import transporter from "./transporter";
 import mailOptionsFunction from "./mailOptions";
 
