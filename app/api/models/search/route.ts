@@ -1,5 +1,1 @@
-
-
-export async function POST(req:Request){
-    
-}
+import { prisma } from "@/lib/prisma";

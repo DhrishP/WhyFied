@@ -1,17 +1,11 @@
-// prisma/schema.prisma
-datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
-enum UserRole {
-  ADMIN
-  USER
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
@@ -22,16 +16,21 @@ model User {
   image                 String?
   password              String?
   role                  UserRole               @default(USER)
-  accounts              Account[]
   coins                 Int                    @default(0)
-  dailyStreak           Int                    @default(0)
+  Streak                Int                    @default(0)
   createdAt             DateTime               @default(now())
   isTwoFactorEnabled    Boolean                @default(false)
-  twoFactorConfirmation TwoFactorConfirmation?
+  difficulty            String                 @default("easy")
+  getQuestionId         String?
+  getQuestion           getQuestion?           @relation(fields: [getQuestionId], references: [id])
+  accounts              Account[]
   Achievement           Achievement[]
   JournalEntries        JournalEntries[]
-  SmallWin              SmallWin[]
   Preferences           Preferences[]
+  Questions             Question[]
+  SmallWin              SmallWin[]
+  twoFactorConfirmation TwoFactorConfirmation?
+  UserModels            UserModels[]
 }
 
 model Account {
@@ -40,15 +39,14 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -81,12 +79,20 @@ model TwoFactorToken {
 }
 
 model TwoFactorConfirmation {
-  id String @id @default(cuid())
-
-  userId String
+  id     String @id @default(cuid())
+  userId String @unique
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
 
-  @@unique([userId])
+model Question {
+  id             String           @id @default(cuid())
+  question       String
+  userId         String
+  difficulty     String
+  modelId        String
+  JournalEntries JournalEntries[]
+  model          Model            @relation(fields: [modelId], references: [id])
+  user           User             @relation(fields: [userId], references: [id])
 }
 
 model registeredEmail {
@@ -99,30 +105,78 @@ model Achievement {
   title    String
   ImageUrl String?
   points   Int
-  user     User    @relation(fields: [userId], references: [id])
   userId   String
+  user     User    @relation(fields: [userId], references: [id])
+}
+
+model Model {
+  id          String        @id @default(cuid())
+  name        ModelName
+  description String?
+  searchPrompt String?
+  Questions   Question[]
+  UserModels  UserModels[]
+  getQuestion getQuestion[]
 }
 
 model JournalEntries {
-  id       String   @id @default(cuid())
-  question String
-  answer   String
-  date     DateTime @default(now())
-  user     User     @relation(fields: [userId], references: [id])
-  userId   String
+  id         String   @id @default(cuid())
+  answer     String
+  date       DateTime @default(now())
+  questionId String
+  userId     String
+  question   Question @relation(fields: [questionId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+
+  @@unique([questionId, userId])
 }
 
 model SmallWin {
   id     String   @id @default(cuid())
   win    String
   date   DateTime @default(now())
-  user   User     @relation(fields: [userId], references: [id])
   userId String
+  user   User     @relation(fields: [userId], references: [id])
 }
 
 model Preferences {
   id     String @id @default(cuid())
-  user   User   @relation(fields: [userId], references: [id])
   userId String
   genre  String
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@unique([genre, userId])
+}
+
+model UserModels {
+  userId  String
+  modelId String
+  model   Model  @relation(fields: [modelId], references: [id])
+  user    User   @relation(fields: [userId], references: [id])
+
+  @@id([userId, modelId])
+}
+
+model getQuestion {
+  id         String @id @default(cuid())
+  question   String
+  difficulty String
+  User       User[]
+  modelId    String
+  model      Model  @relation(fields: [modelId], references: [id])
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+enum ModelName {
+  Krishna
+  Marcus
+  Albert
+  Ayn
+  Nietzsche
+  Epictetus
+  Seneca
 }
