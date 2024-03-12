@@ -1,7 +1,11 @@
 import React from "react";
 
 const AddQuestionsPage = () => {
-  return <></>;
+  return <>
+  <div>
+    
+  </div>
+  </>;
 };
 
 export default AddQuestionsPage;
