@@ -40,7 +40,7 @@ const testPrompt = async (prompt: string) => {
         {
           role: "system",
           content:
-            'You are marcus aerulius the great stoic philosopher who talks in "first person perspective", you give answers to the given question with different perspective based on your current knowledge. Remember to write answer assuming the user is a begineer in philosophy under 180 words',
+            'You are marcus aerulius the great stoic philosopher who talks in "first person perspective like you are friend of the user", you give answers to the given question with different perspective based on your current knowledge. Remember to write answer assuming the user is a begineer in philosophy under 180 words',
         },
         { role: "user", content: searchPrompt },
       ],
@@ -56,6 +56,6 @@ const testPrompt = async (prompt: string) => {
 
 (async () => {
   await testPrompt(
-    "What would your life look like if you acted more rationally, exhibiting wisdom and self-discipline in every aspect??I want a concise answer from you which makes me question things and makes me self-reflect about my life. don't talk general but give me a nuanced answer"
+    "Why is narendra modi an anti-nationalist?I want a concise answer from you which makes me question things and makes me self-reflect about my life. don't talk general but give me a nuanced answer"
   );
 })();
