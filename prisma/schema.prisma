@@ -17,12 +17,10 @@ model User {
   password              String?
   role                  UserRole               @default(USER)
   coins                 Int                    @default(0)
-  Streak                Int                    @default(0)
   createdAt             DateTime               @default(now())
   isTwoFactorEnabled    Boolean                @default(false)
   difficulty            String                 @default("easy")
-  getQuestionId         String?
-  getQuestion           getQuestion?           @relation(fields: [getQuestionId], references: [id])
+  Streak                Int                    @default(0)
   accounts              Account[]
   Achievement           Achievement[]
   JournalEntries        JournalEntries[]
@@ -31,6 +29,7 @@ model User {
   SmallWin              SmallWin[]
   twoFactorConfirmation TwoFactorConfirmation?
   UserModels            UserModels[]
+  UserQuestion          UserQuestion[]
 }
 
 model Account {
@@ -110,13 +109,13 @@ model Achievement {
 }
 
 model Model {
-  id          String        @id @default(cuid())
-  name        ModelName
-  description String?
+  id           String        @id @default(cuid())
+  name         ModelName
+  description  String?
   searchPrompt String?
-  Questions   Question[]
-  UserModels  UserModels[]
-  getQuestion getQuestion[]
+  Questions    Question[]
+  UserModels   UserModels[]
+  getQuestion  getQuestion[]
 }
 
 model JournalEntries {
@@ -158,12 +157,21 @@ model UserModels {
 }
 
 model getQuestion {
-  id         String @id @default(cuid())
-  question   String
-  difficulty String
-  User       User[]
-  modelId    String
-  model      Model  @relation(fields: [modelId], references: [id])
+  id           String         @id @default(cuid())
+  question     String
+  difficulty   String
+  modelId      String
+  UserQuestion UserQuestion[]
+  model        Model          @relation(fields: [modelId], references: [id])
+}
+
+model UserQuestion {
+  userId      String
+  questionId  String
+  getQuestion getQuestion @relation(fields: [questionId], references: [id])
+  user        User        @relation(fields: [userId], references: [id])
+
+  @@id([userId, questionId])
 }
 
 enum UserRole {
