@@ -111,7 +111,8 @@ model Achievement {
 model Model {
   id           String        @id @default(cuid())
   name         ModelName
-  description  String?
+  description  String
+  ImageUrl     String
   searchPrompt String?
   Questions    Question[]
   UserModels   UserModels[]
