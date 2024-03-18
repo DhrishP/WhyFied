@@ -1,5 +1,6 @@
 import { OpenAI } from "openai";
 import { createClient } from "@supabase/supabase-js";
+import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
@@ -46,7 +47,12 @@ export async function POST(req: Request) {
       stream: false,
     });
     console.log("\nAnswer\n", response.choices[0].message.content);
+    NextResponse.json({
+      status: 200,
+      body: response.choices[0].message.content,
+    });
   } catch (error) {
     console.log("error", error);
+    return NextResponse.json({ status: 500, body: "Internal Server Error" });
   }
 }
