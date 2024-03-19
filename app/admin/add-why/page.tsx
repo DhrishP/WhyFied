@@ -17,21 +17,30 @@ const AddQuestionsPage = () => {
     { id: "5", name: "Nietzsche" },
     { id: "6", name: "Epictetus" },
     { id: "7", name: "Ayn" },
+    { id: "8", name: "General" },
   ];
   const difficultyArray = [
     { id: "1", name: "easy" },
     { id: "2", name: "medium" },
     { id: "3", name: "hard" },
   ];
+  const typeArray = [
+    { id: "1", name: "earnest" },
+    { id: "2", name: "facetious" },
+  ];
   const [selectedModel, setSelectedModel] = React.useState<{
     id: string;
     name: string;
-  } | null>({ id: "1", name: "Krishna" });
+  } | null>({ id: "8", name: "General" });
   const [difficultyModel, setDifficultyModel] = React.useState<{
     id: string;
     name: string;
-  } | null>({ id: "1", name: "easy" });
+  } | null>({ id: "2", name: "medium" });
   const [tagValue, setTagValue] = React.useState<string>("");
+  const [typeValue, setTypeValue] = React.useState<{
+    id: string;
+    name: string;
+  } | null>({ id: "1", name: "earnest" });
   // const [prompt, setPrompt] = React.useState<string>("");
   // const promptChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   setPrompt(event.target.value);
@@ -42,12 +51,19 @@ const AddQuestionsPage = () => {
   const HandleSubmit = () => {
     console.log("selectedModel", selectedModel);
     console.log("tagValue", tagValue);
-    if(!selectedModel) return toast("No model selected");
-    if(tagValue.length < 30) return toast("No input value");
-    if(!session.data) return toast("No session data");
-    if(!difficultyModel) return toast("No difficulty model");
+    if (!selectedModel) return toast("No model selected");
+    if (tagValue.length < 30) return toast("No input value");
+    if (!session.data) return toast("No session data");
+    if (!difficultyModel) return toast("No difficulty model");
+    if (!typeValue) return toast("No type model");
     startTransition(() => {
-      AddQuestion(selectedModel,tagValue,difficultyModel.name,session.data.user.id).then((data) => {
+      AddQuestion(
+        selectedModel,
+        tagValue,
+        difficultyModel.name,
+        session.data.user.id,
+        typeValue.name
+      ).then((data) => {
         if (data.error) {
           toast("Error in adding question");
         }
@@ -55,8 +71,7 @@ const AddQuestionsPage = () => {
           toast("Question added successfully");
         }
       });
-    }
-    );
+    });
   };
 
   const handleModelChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -67,14 +82,24 @@ const AddQuestionsPage = () => {
     setSelectedModel(selectedModel || null);
     console.log(selectedModel);
   };
-  const handleDifficultyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleDifficultyChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const selectedModelId = event.target.value;
     const selectedModel = difficultyArray.find(
       (model) => model.id === selectedModelId
     );
     setDifficultyModel(selectedModel || null);
     console.log(selectedModel);
-  }
+  };
+  const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedModelId = event.target.value;
+    const selectedModel = typeArray.find(
+      (model) => model.id === selectedModelId
+    );
+    setTypeValue(selectedModel || null);
+    console.log(selectedModel);
+  };
   if (!modelArray) return <div>Loading...</div>;
 
   return (
@@ -99,6 +124,13 @@ const AddQuestionsPage = () => {
             </option>
           ))}
         </select>
+        <select onChange={handleTypeChange}>
+          {typeArray.map((model) => (
+            <option key={model.id} value={model.id}>
+              {model.name}
+            </option>
+          ))}
+        </select>
         <input
           type="text"
           value={tagValue}
@@ -106,7 +138,10 @@ const AddQuestionsPage = () => {
           className="py-4 w-[70vw] border border-black placeholder:text-start"
           placeholder="enter the question.."
         />
-        <Button disabled={isPending} onClick={HandleSubmit}>Submit</Button>
+
+        <Button disabled={isPending} onClick={HandleSubmit}>
+          Submit
+        </Button>
       </div>
     </>
   );

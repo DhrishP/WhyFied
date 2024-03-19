@@ -161,6 +161,7 @@ model getQuestion {
   id           String         @id @default(cuid())
   question     String
   difficulty   String
+  type         Types          @default(earnest)
   modelId      String
   UserQuestion UserQuestion[]
   model        Model          @relation(fields: [modelId], references: [id])
@@ -186,6 +187,7 @@ enum Types {
 }
 
 enum ModelName {
+  General
   Krishna
   Marcus
   Albert
