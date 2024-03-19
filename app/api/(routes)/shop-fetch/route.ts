@@ -47,7 +47,7 @@ export async function POST(req: Request) {
       stream: false,
     });
     console.log("\nAnswer\n", response.choices[0].message.content);
-    NextResponse.json({
+    return NextResponse.json({
       status: 200,
       body: response.choices[0].message.content,
     });

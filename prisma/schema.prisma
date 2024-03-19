@@ -19,7 +19,6 @@ model User {
   coins                 Int                    @default(0)
   createdAt             DateTime               @default(now())
   isTwoFactorEnabled    Boolean                @default(false)
-  difficulty            String                 @default("easy")
   Streak                Int                    @default(0)
   accounts              Account[]
   Achievement           Achievement[]
@@ -140,12 +139,13 @@ model SmallWin {
 }
 
 model Preferences {
-  id     String @id @default(cuid())
-  userId String
-  genre  String
-  user   User   @relation(fields: [userId], references: [id])
+  id         String @id @default(cuid())
+  userId     String
+  difficulty String @default("easy")
+  type       Types  @default(earnest)
+  user       User   @relation(fields: [userId], references: [id])
 
-  @@unique([genre, userId])
+  @@unique([type, userId])
 }
 
 model UserModels {
@@ -178,6 +178,11 @@ model UserQuestion {
 enum UserRole {
   ADMIN
   USER
+}
+
+enum Types {
+  earnest
+  facetious
 }
 
 enum ModelName {
