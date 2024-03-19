@@ -10,14 +10,14 @@ const AddQuestionsPage = () => {
   const [isPending, startTransition] = useTransition();
   const session = useSession();
   const modelArray = [
-    { id: "1", name: "Krishna" },
+    { id: "1", name: "General" },
     { id: "2", name: "Marcus" },
     { id: "3", name: "Albert" },
     { id: "4", name: "Seneca" },
     { id: "5", name: "Nietzsche" },
     { id: "6", name: "Epictetus" },
     { id: "7", name: "Ayn" },
-    { id: "8", name: "General" },
+    { id: "8", name: "Krishna" },
   ];
   const difficultyArray = [
     { id: "1", name: "easy" },
@@ -31,11 +31,11 @@ const AddQuestionsPage = () => {
   const [selectedModel, setSelectedModel] = React.useState<{
     id: string;
     name: string;
-  } | null>({ id: "8", name: "General" });
+  } | null>({ id: "1", name: "General" });
   const [difficultyModel, setDifficultyModel] = React.useState<{
     id: string;
     name: string;
-  } | null>({ id: "2", name: "medium" });
+  } | null>({ id: "1", name: "easy" });
   const [tagValue, setTagValue] = React.useState<string>("");
   const [typeValue, setTypeValue] = React.useState<{
     id: string;
