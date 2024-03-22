@@ -8,6 +8,8 @@ import {
 } from "@/components/ui/carousel";
 import SimpleNeoCard from "../ui/neo-brutalist/simple-neo-card";
 import NeoButton from "../ui/neo-brutalist/button";
+import axios from "axios";
+import { toast } from "sonner";
 
 const OptionsCaraosel = () => {
   const [isActive, setIsActive] = React.useState({
@@ -81,9 +83,25 @@ const OptionsCaraosel = () => {
       [type]: true,
     });
   };
-  const onSubmit = () => {
-    console.log("submit");
-  }
+  const onSubmit = async () => {
+    const getDifficulty = Object.keys(isActive).find(
+      (key) => isActive[key as keyof typeof isActive]
+    );
+    const getType = Object.keys(isTypeActive).find(
+      (key) => isTypeActive[key as keyof typeof isTypeActive]
+    );
+    if (!getDifficulty || !getType)
+      return alert("Please select a difficulty and type");
+    const response = await axios.post("/api/add-preferences", {
+      type: getType,
+      difficulty: getDifficulty,
+    });
+    if (response.status === 200) {
+      toast(response.data);
+    } else {
+      toast(response.data);
+    }
+  };
   return (
     <Carousel className="w-screen  h-screen flex items-center justify-center">
       <CarouselContent className="w-full h-full">
@@ -126,7 +144,7 @@ const OptionsCaraosel = () => {
             <div className={`bg-black rounded-full w-3 h-3`}></div>
           </div>
           <NeoButton
-          onClick={onSubmit}
+            onClick={onSubmit}
             color="lime"
             rounded="md"
             buttonText="Let's Start Thinking"

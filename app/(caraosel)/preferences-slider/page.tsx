@@ -1,10 +1,10 @@
 import OptionsCaraosel from '@/components/landing-webapp/options-caraosel'
 import React from 'react'
 
-const OptionsSlider = () => {
+const PreferencesSliderPage = () => {
   return (
     <OptionsCaraosel/>
   )
 }
 
-export default OptionsSlider
+export default PreferencesSliderPage
