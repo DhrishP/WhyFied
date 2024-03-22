@@ -7,6 +7,7 @@ type ButtonType = {
   color?: "violet" | "pink" | "red" | "orange" | "yellow" | "lime" | "cyan";
   disabled?: boolean;
   className?: string;
+  onClick?: () => void;
 };
 
 const NeoButton = ({
@@ -16,9 +17,11 @@ const NeoButton = ({
   color = "cyan",
   disabled,
   className,
+  onClick
 }: ButtonType) => {
   return (
     <button
+      onClick={onClick}
       className={classNames(
         "border-black border-2",
 
