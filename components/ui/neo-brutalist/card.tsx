@@ -1,4 +1,5 @@
-import Link from "next/link";	
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 type CardType = {
   thumbnail: string | undefined;
@@ -7,6 +8,7 @@ type CardType = {
   description?: string;
   callToActionText?: string;
   calllToActionLink: string;
+  className?: string;
 };
 
 const Card = ({
@@ -16,9 +18,15 @@ const Card = ({
   description,
   callToActionText,
   calllToActionLink,
+  className,
 }: CardType) => {
   return (
-    <div className="w-full max-w-2xl h-full md:h-[480px] 2xl:h-[600px] border-black border-2 rounded-md hover:shadow-[8px_8px_0px_rgba(0,0,0,1)] bg-white">
+    <div
+      className={cn(
+        className,
+        "w-full max-w-2xl h-full md:h-[480px] 2xl:h-[600px] border-black border-2 rounded-md hover:shadow-[8px_8px_0px_rgba(0,0,0,1)] bg-white"
+      )}
+    >
       <Link href={calllToActionLink}>
         <article className="w-full h-full">
           <figure className="w-full border-black border-b-2">

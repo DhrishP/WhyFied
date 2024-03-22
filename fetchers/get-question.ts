@@ -1,4 +1,3 @@
-"use server";
 import { currentUser } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
@@ -13,12 +12,14 @@ export default async function GetQuestion() {
     },
     select: {
       difficulty: true,
+      type: true,
     },
   });
   if (!getDifficulty) throw new Error("Difficulty not found");
   const res = await prisma.getQuestion.findMany({
     where: {
       difficulty: getDifficulty.difficulty,
+      type: getDifficulty.type,
     },
   });
   const res2 = await prisma.userQuestion.findMany({

@@ -1,4 +1,4 @@
-"use server"
+"use server";
 import { currentUser } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
@@ -10,7 +10,7 @@ export default async function GetModels() {
     },
     include: {
       model: true,
-    }
+    },
   });
   return res.map((x) => x.model);
 }
