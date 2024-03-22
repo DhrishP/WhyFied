@@ -140,7 +140,7 @@ model SmallWin {
 
 model Preferences {
   id         String @id @default(cuid())
-  userId     String
+  userId     String @unique
   difficulty String @default("easy")
   type       Types  @default(earnest)
   user       User   @relation(fields: [userId], references: [id])
@@ -161,7 +161,7 @@ model getQuestion {
   id           String         @id @default(cuid())
   question     String
   difficulty   String
-  type         Types          @default(earnest)
+  type         Types          
   modelId      String
   UserQuestion UserQuestion[]
   model        Model          @relation(fields: [modelId], references: [id])
@@ -179,6 +179,11 @@ model UserQuestion {
 enum UserRole {
   ADMIN
   USER
+}
+enum Difficulty {
+  easy
+  intermediate
+  hardcore
 }
 
 enum Types {
