@@ -22,10 +22,14 @@ const DrawerComponent = ({
   description: string;
 }) => {
   return (
-   
     <Drawer>
-      <DrawerTrigger >
-        <NeoButton color="yellow" rounded="md" size="sm" buttonText={buttonText} />
+      <DrawerTrigger>
+        <NeoButton
+          color="yellow"
+          rounded="md"
+          size="sm"
+          buttonText={buttonText}
+        />
       </DrawerTrigger>
       <DrawerContent className="lg:mx-20 ">
         <DrawerHeader className="flex items-center justify-between ">
@@ -36,7 +40,6 @@ const DrawerComponent = ({
         {children}
       </DrawerContent>
     </Drawer>
-
   );
 };
 
