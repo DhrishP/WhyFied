@@ -14,7 +14,7 @@ export async function POST(req: Request) {
     },
   });
   if (isAlreadyAnswered) {
-    NextResponse.json({ message: "Already made" }, { status: 400 });
+   return NextResponse.json({ message: "Already made" }, { status: 400 });
   }
   const res = await prisma.savequestionTimeStamps.update({
     where: {

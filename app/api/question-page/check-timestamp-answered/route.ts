@@ -2,7 +2,7 @@ import { currentUser } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-export async function GET(req:Request) {
+export async function POST(req:Request) {
   const user = await currentUser();
   if (!user) {
     throw new Error("User not found");
@@ -14,7 +14,7 @@ export async function GET(req:Request) {
     },
   });
   if (IsAlreadyAns) {
-    NextResponse.json({ message: "Already answered" }, { status: 400});
+    return NextResponse.json({ message: "Already answered" }, { status: 400});
   }
   return NextResponse.json({ message: "Not answered" }, { status: 200 });
 }

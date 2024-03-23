@@ -2,7 +2,8 @@ import { prisma } from "@/lib/prisma";
 import { currentUser } from "@/lib/auth";
 import { NextResponse } from "next/server";
 
-export async function GET(req: Request) {
+export async function POST(req: Request) {
+  console.log("hello");
   const user = await currentUser();
   if (!user) {
     throw new Error("User not found");
@@ -12,8 +13,9 @@ export async function GET(req: Request) {
       timestamp: new Date().toLocaleDateString(),
     },
   });
+  console.log(IsAlreadyMade);
   if (IsAlreadyMade) {
-    NextResponse.json({ message: "Already made" }, { status: 200 });
+    return NextResponse.json({ message: "Already made" }, { status: 200 });
   }
   const res = await prisma.savequestionTimeStamps.create({
     data: {

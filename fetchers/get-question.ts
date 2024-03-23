@@ -22,6 +22,9 @@ export default async function GetQuestion() {
       difficulty: getDifficulty.difficulty,
       type: getDifficulty.type,
     },
+    orderBy:{
+      updatedAt: 'asc'
+    }
   });
   const res2 = await prisma.userQuestion.findMany({
     where: {
