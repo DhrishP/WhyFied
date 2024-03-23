@@ -9,27 +9,43 @@ datasource db {
 }
 
 model User {
-  id                     String                   @id @default(cuid())
-  name                   String?
-  email                  String?                  @unique
-  emailVerified          DateTime?
-  image                  String?
-  password               String?
-  role                   UserRole                 @default(USER)
-  coins                  Int                      @default(0)
-  createdAt              DateTime                 @default(now())
-  isTwoFactorEnabled     Boolean                  @default(false)
-  Streak                 Int                      @default(0)
-  accounts               Account[]
-  Achievement            Achievement[]
-  JournalEntries         JournalEntries[]
-  Preferences            Preferences?
-  Questions              Question[]
-  SmallWin               SmallWin[]
-  twoFactorConfirmation  TwoFactorConfirmation?
-  UserModels             UserModels[]
-  UserQuestion           UserQuestion[]
-  savequestionTimeStamps savequestionTimeStamps[]
+  id                    String                 @id @default(cuid())
+  name                  String?
+  email                 String?                @unique
+  emailVerified         DateTime?
+  image                 String?
+  password              String?
+  role                  UserRole               @default(USER)
+  coins                 Int                    @default(0)
+  createdAt             DateTime               @default(now())
+  promptTokes           Int                    @default(3)
+  isTwoFactorEnabled    Boolean                @default(false)
+  Streak                Int                    @default(0)
+  accounts              Account[]
+  Achievement           Achievement[]
+  JournalEntries        JournalEntries[]
+  Preferences           Preferences?
+  SmallWin              SmallWin[]
+  twoFactorConfirmation TwoFactorConfirmation?
+  UserModels            UserModels[]
+  UserQuestion          UserQuestion[]
+  profilePictures       profilePictures[]
+  Quotes                Quotes[]
+}
+
+model profilePictures {
+  id       String @id @default(cuid())
+  imageUrl String @unique
+  name     String @unique
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Quotes {
+  id     String @id @default(cuid())
+  quote  String @unique
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Account {
@@ -83,17 +99,6 @@ model TwoFactorConfirmation {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model Question {
-  id             String           @id @default(cuid())
-  question       String
-  userId         String
-  difficulty     String
-  modelId        String
-  JournalEntries JournalEntries[]
-  model          Model            @relation(fields: [modelId], references: [id])
-  user           User             @relation(fields: [userId], references: [id])
-}
-
 model registeredEmail {
   id    String @id @default(cuid())
   email String @unique
@@ -113,22 +118,20 @@ model Model {
   name         ModelName
   description  String
   searchPrompt String?
+  price        Int           @default(500)
   ImageUrl     String
-  Questions    Question[]
   UserModels   UserModels[]
   getQuestion  getQuestion[]
 }
 
 model JournalEntries {
-  id         String   @id @default(cuid())
-  answer     String
-  date       DateTime @default(now())
-  questionId String
-  userId     String
-  question   Question @relation(fields: [questionId], references: [id])
-  user       User     @relation(fields: [userId], references: [id])
-
-  @@unique([questionId, userId])
+  id            String      @id @default(cuid())
+  answer        String
+  date          DateTime    @default(now())
+  userId        String
+  getQuestionId String
+  getQuestion   getQuestion @relation(fields: [getQuestionId], references: [id])
+  user          User        @relation(fields: [userId], references: [id])
 }
 
 model SmallWin {
@@ -159,22 +162,23 @@ model UserModels {
 }
 
 model getQuestion {
-  id           String         @id @default(cuid())
-  question     String
-  difficulty   String
-  modelId      String
-  type         Types
-  UserQuestion UserQuestion[]
-  model        Model          @relation(fields: [modelId], references: [id])
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @default(now()) @updatedAt
+  id             String           @id @default(cuid())
+  question       String
+  difficulty     String
+  modelId        String
+  type           Types
+  UserQuestion   UserQuestion[]
+  model          Model            @relation(fields: [modelId], references: [id])
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @default(now()) @updatedAt
+  JournalEntries JournalEntries[]
 }
 
 model savequestionTimeStamps {
   userId     String
-  user       User    @relation(fields: [userId], references: [id])
   timestamp  String
   isAnswered Boolean @default(false)
+
   @@id([userId, timestamp])
   @@unique([userId, timestamp])
 }
