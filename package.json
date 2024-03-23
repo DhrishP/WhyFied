@@ -23,6 +23,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-switch": "^1.0.3",
     "@supabase/supabase-js": "^2.39.8",
+    "ai": "^3.0.13",
     "aws-sdk": "^2.1545.0",
     "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
