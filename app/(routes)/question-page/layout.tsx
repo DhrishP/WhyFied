@@ -1,21 +1,36 @@
-
 import React from "react";
+import { prisma } from "@/lib/prisma";
+import { auth } from "@/auth";
 
 export default async function QuestionPagelayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_APP_URL}/api/question-page/check-timestamp`,
-    { method: "POST", cache: "no-store" }
-  );
-  if (res.status === 200) {
-    return <>{children}</>;
+  const session = await auth();
+  if (!session) {
+    return <p>Loading...</p>;
   }
+  const IsAlreadyMade = await prisma.savequestionTimeStamps.findFirst({
+    where: {
+      timestamp: new Date().toLocaleDateString(),
+    },
+  });
+  if (!IsAlreadyMade) {
+    const res = await prisma.savequestionTimeStamps.create({
+      data: {
+        userId: session.user.id,
+        timestamp: new Date().toLocaleDateString(),
+      },
+    });
+    if (!res) {
+      return <p>Loading...</p>;
+    }
+  }
+
   return (
     <>
-      <p>something went wrong</p>
+      <div>{children}</div>
     </>
   );
 }
