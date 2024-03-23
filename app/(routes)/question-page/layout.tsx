@@ -9,7 +9,7 @@ export default async function QuestionPagelayout({
 }) {
   const session = await auth();
   if (!session) {
-    return <p>Loading...</p>;
+    throw new Error("Session not found");
   }
   const IsAlreadyMade = await prisma.savequestionTimeStamps.findFirst({
     where: {
@@ -19,7 +19,7 @@ export default async function QuestionPagelayout({
   if (!IsAlreadyMade) {
     const res = await prisma.savequestionTimeStamps.create({
       data: {
-        userId: session.user.id,
+        userId: session.user.id ? session.user.id : "",
         timestamp: new Date().toLocaleDateString(),
       },
     });
