@@ -1,12 +1,20 @@
-import { currentUser } from "@/lib/auth";
+import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { modelId } = await req.json();
-    const user = await currentUser();
-    if (!user) {
+    const { modelId, price } = await req.json();
+    const session = await auth();
+    if (!session || !modelId) {
+      return NextResponse.json({ status: 401, body: "Unauthorized" });
+    }
+    const user = await prisma.user.findFirst({
+      where: {
+        id: session.user.id,
+      },
+    });
+    if (!user?.id) {
       return NextResponse.json({ status: 401, body: "Unauthorized" });
     }
     const checkIfAlreadyBought = await prisma.userModels.findFirst({
@@ -18,13 +26,27 @@ export async function POST(req: Request) {
     if (checkIfAlreadyBought) {
       return NextResponse.json({ status: 400, body: "Already bought" });
     }
-    await prisma.userModels.create({
+    const res2 = await prisma.userModels.create({
       data: {
         userId: user.id,
         modelId,
       },
     });
-    return NextResponse.json({ status: 200, body: "Bought" });
+    if (!res2) {
+      return NextResponse.json({ status: 500, body: "Internal Server Error" });
+    }
+    const res3 =await prisma.user.update({
+      where:{
+        id:user.id
+      },
+      data:{
+        coins:user.coins-price
+      }
+    })
+    if(!res3){
+      return NextResponse.json({ status: 500, body: "Internal Server Error" });
+    }
+    return NextResponse.json({ status: 200, body: "Model [urchased" });
   } catch (error) {
     console.log(error);
     return NextResponse.json({ status: 500, body: "Internal Server Error" });

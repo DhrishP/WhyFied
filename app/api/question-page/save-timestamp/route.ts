@@ -4,8 +4,8 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   const user = await currentUser();
-  if (!user) {
-    throw new Error("User not found");
+  if (!user?.id) {
+    return NextResponse.json({ message: "User not found" }, { status: 404 });
   }
   const isAlreadyAnswered = await prisma.savequestionTimeStamps.findFirst({
     where: {

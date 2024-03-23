@@ -1,10 +1,15 @@
-import { currentUser } from "@/lib/auth";
+
+import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 export async function POST(req: Request) {
-  const user = await currentUser();
+  const session = await auth();
+  if (!session?.user) {
+    return NextResponse.json({ status: 401, body: "Unauthorized" });
+  }
+  const user = session.user;
   const { difficulty, type } = await req.json();
-  if (!user) {
+  if (!user.id) {
     return NextResponse.json({ status: 401, body: "Unauthorized" });
   }
   if (!difficulty || !type) {

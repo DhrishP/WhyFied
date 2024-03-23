@@ -1,10 +1,18 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { useCurrentUserInfo } from "@/hooks/use-current-user-info";
+import { auth } from "@/auth";
 
 export async function POST(req: Request) {
   const { note, questionId } = await req.json();
-  const user = await useCurrentUserInfo();
+  const session = await auth()
+  if (!session?.user) {
+    return NextResponse.json({ status: 401, body: "Unauthorized" });
+  }
+  const user = await prisma.user.findFirst({
+    where: {
+      id: session.user.id,
+    },
+  });
   if (!user) {
     return NextResponse.json({ status: 401, body: "Unauthorized" });
   }
@@ -15,7 +23,7 @@ export async function POST(req: Request) {
     data: {
       userId: user.id,
       answer: note,
-      questionId,
+      getQuestionId: questionId,
       date: new Date(),
     },
   });
@@ -29,9 +37,34 @@ export async function POST(req: Request) {
         coins: user.coins + 500,
       },
     });
-    if (res2) {
-      return NextResponse.json({ status: 200, body: "Note added" });
+    if (!res2) {
+      return NextResponse.json({ status: 500, body: "ternal Server Error" });
     }
+    const res3 =await prisma.savequestionTimeStamps.update({
+      where:{
+        userId_timestamp:{
+          userId:user.id,
+          timestamp:new Date().toLocaleDateString()
+        
+        }
+      },
+      data:{
+        isAnswered:true
+      }
+    })
+    if(!res3){
+      return NextResponse.json({ status: 500, body: "ternal Server Error" });
+    }
+    const res4 = await prisma.userQuestion.create({
+      data:{
+        questionId,
+        userId:user.id
+      }
+    })
+    if(!res4){
+      return NextResponse.json({ status: 500, body: "ternal Server Error" });
+    }
+    return NextResponse.json({ status: 200, body: "Answer Submitted" });
   }
 
   return NextResponse.json({ status: 500, body: "Internal Server Error" });
