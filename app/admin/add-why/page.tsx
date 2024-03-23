@@ -52,7 +52,7 @@ const AddQuestionsPage = () => {
     console.log("selectedModel", selectedModel);
     console.log("tagValue", tagValue);
     if (!selectedModel) return toast("No model selected");
-    if (tagValue.length < 30) return toast("No input value");
+    if (tagValue.length < 10) return toast("No input value");
     if (!session.data) return toast("No session data");
     if (!difficultyModel) return toast("No difficulty model");
     if (!typeValue) return toast("No type model");

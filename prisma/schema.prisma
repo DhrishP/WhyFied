@@ -9,26 +9,27 @@ datasource db {
 }
 
 model User {
-  id                    String                 @id @default(cuid())
-  name                  String?
-  email                 String?                @unique
-  emailVerified         DateTime?
-  image                 String?
-  password              String?
-  role                  UserRole               @default(USER)
-  coins                 Int                    @default(0)
-  createdAt             DateTime               @default(now())
-  isTwoFactorEnabled    Boolean                @default(false)
-  Streak                Int                    @default(0)
-  accounts              Account[]
-  Achievement           Achievement[]
-  JournalEntries        JournalEntries[]
-  Preferences           Preferences[]
-  Questions             Question[]
-  SmallWin              SmallWin[]
-  twoFactorConfirmation TwoFactorConfirmation?
-  UserModels            UserModels[]
-  UserQuestion          UserQuestion[]
+  id                     String                   @id @default(cuid())
+  name                   String?
+  email                  String?                  @unique
+  emailVerified          DateTime?
+  image                  String?
+  password               String?
+  role                   UserRole                 @default(USER)
+  coins                  Int                      @default(0)
+  createdAt              DateTime                 @default(now())
+  isTwoFactorEnabled     Boolean                  @default(false)
+  Streak                 Int                      @default(0)
+  accounts               Account[]
+  Achievement            Achievement[]
+  JournalEntries         JournalEntries[]
+  Preferences            Preferences?
+  Questions              Question[]
+  SmallWin               SmallWin[]
+  twoFactorConfirmation  TwoFactorConfirmation?
+  UserModels             UserModels[]
+  UserQuestion           UserQuestion[]
+  savequestionTimeStamps savequestionTimeStamps[]
 }
 
 model Account {
@@ -111,8 +112,8 @@ model Model {
   id           String        @id @default(cuid())
   name         ModelName
   description  String
-  ImageUrl     String
   searchPrompt String?
+  ImageUrl     String
   Questions    Question[]
   UserModels   UserModels[]
   getQuestion  getQuestion[]
@@ -139,11 +140,11 @@ model SmallWin {
 }
 
 model Preferences {
-  id         String @id @default(cuid())
-  userId     String @unique
-  difficulty String @default("easy")
-  type       Types  @default(earnest)
-  user       User   @relation(fields: [userId], references: [id])
+  id         String     @id @default(cuid())
+  userId     String     @unique
+  difficulty Difficulty
+  type       Types
+  user       User       @relation(fields: [userId], references: [id])
 
   @@unique([type, userId])
 }
@@ -161,10 +162,21 @@ model getQuestion {
   id           String         @id @default(cuid())
   question     String
   difficulty   String
-  type         Types          
   modelId      String
+  type         Types
   UserQuestion UserQuestion[]
   model        Model          @relation(fields: [modelId], references: [id])
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @default(now()) @updatedAt
+}
+
+model savequestionTimeStamps {
+  userId     String
+  user       User    @relation(fields: [userId], references: [id])
+  timestamp  String
+  isAnswered Boolean @default(false)
+  @@id([userId, timestamp])
+  @@unique([userId, timestamp])
 }
 
 model UserQuestion {
@@ -180,6 +192,7 @@ enum UserRole {
   ADMIN
   USER
 }
+
 enum Difficulty {
   easy
   intermediate
@@ -192,7 +205,6 @@ enum Types {
 }
 
 enum ModelName {
-  General
   Krishna
   Marcus
   Albert
@@ -200,4 +212,5 @@ enum ModelName {
   Nietzsche
   Epictetus
   Seneca
+  General
 }

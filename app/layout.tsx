@@ -10,6 +10,7 @@ const rajdhani = Rajdhani({
   weight: [ "500", "600", "700"],
 });
 
+
 export const metadata: Metadata = {
   title: "WhyFied",
   description: "A Progressive web app that makes you think",
