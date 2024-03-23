@@ -3,7 +3,6 @@ import { UserRole } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  console.log('hi')
   const role = await auth();
 
   if (role?.user.role === UserRole.ADMIN) {

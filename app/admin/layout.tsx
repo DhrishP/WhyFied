@@ -1,10 +1,13 @@
 import React from "react";
-
+import {auth} from '@/auth'
 
 const AdminLayout = async ({ children }: { children: React.ReactNode }) => {
-  const isAdmin = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/admin`);
-  console.log(isAdmin.status);
-  if (isAdmin.status !== 200) {
+  const session = await auth()
+  if(!session) {
+    return <div>403 Forbidden</div>
+  }
+  const isAdmin = session?.user.role
+  if (isAdmin !== 'ADMIN') {
     return <div>403 Forbidden</div>;
   }
 
