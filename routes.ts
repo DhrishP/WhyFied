@@ -21,7 +21,7 @@ export const authRoutes = [
   "/auth/new-password"
 ];
 
-/**
+/** 
  * The prefix for API authentication routes
  * Routes that start with this prefix are used for API authentication purposes
  * @type {string}
