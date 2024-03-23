@@ -1,3 +1,4 @@
+
 import { currentUser } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
@@ -15,7 +16,7 @@ export default async function GetQuestion() {
       type: true,
     },
   });
-  if (!getDifficulty) throw new Error("Difficulty not found");
+  if (!getDifficulty?.difficulty || !getDifficulty?.type) throw new Error("Difficulty not found");
   const res = await prisma.getQuestion.findMany({
     where: {
       difficulty: getDifficulty.difficulty,
@@ -30,7 +31,7 @@ export default async function GetQuestion() {
       getQuestion: true,
     },
   });
-  if (!res2) throw new Error("User question not found");
+  if(res2.length === 0) return res.slice(0, 3);
   const userQuestions = res2.map((x) => x.getQuestion);
   const finalRes = res.filter((x) => !userQuestions.includes(x)).slice(0, 3);
 

@@ -1,5 +1,6 @@
 import React from "react";
 import NeoButton from "@/components/ui/neo-brutalist/button";
+import { LogoutButton } from "../auth/logout-button";
 
 const MenuButton = ({ children }:{children:React.ReactNode}) => (
   <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-300">
@@ -20,6 +21,9 @@ const Navbar = () => {
           ))}
         </div>
         <NeoButton buttonText="Download" color="yellow" rounded="none" size="md" className="font-bold"/>
+        <LogoutButton>
+          logout
+        </LogoutButton>
       </nav>
     </header>
   );
