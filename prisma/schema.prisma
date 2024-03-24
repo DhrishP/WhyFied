@@ -114,23 +114,33 @@ model Achievement {
 }
 
 model Model {
-  id           String        @id @default(cuid())
-  name         ModelName
-  description  String
-  searchPrompt String?
-  price        Int           @default(500)
-  ImageUrl     String
-  HeadImageUrl String?
-  UserModels   UserModels[]
-  getQuestion  getQuestion[]
+  id                 String    @id @default(cuid())
+  name               ModelName
+  fullName           String    @default("hw")
+  shopdescription    String    @default("hw")
+  description        String
+  searchPrompt       String?
+  price              Int       @default(500)
+  ImageUrl           String
+  HeadImageUrl       String?
+  Sarcasm            Int?
+  EaseToUnderstand   Int?
+  ContextSensitivity Int?
+
+  UserModels  UserModels[]
+  getQuestion getQuestion[]
 }
 
 model JournalEntries {
   id            String      @id @default(cuid())
-  answer        String
   date          DateTime    @default(now())
   userId        String
   getQuestionId String
+  perspective1  String
+  perspective2  String
+  perspective3  String?
+  perspective4  String?
+  perspective5  String?
   getQuestion   getQuestion @relation(fields: [getQuestionId], references: [id])
   user          User        @relation(fields: [userId], references: [id])
 }
