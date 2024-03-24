@@ -1,10 +1,11 @@
 import { OpenAI } from "openai";
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
+import { StreamingTextResponse, OpenAIStream } from "ai";
 
 export async function POST(req: Request) {
   try {
-    const { prompt, description } = await req.json();
+    const { prompt, description,searchPromptModel } = await req.json();
     const supabaseAdmin = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.SUPABASE_SERVICE_ROLE_KEY!
@@ -33,7 +34,7 @@ export async function POST(req: Request) {
       )} in first person perspective as you are marcus aerulius the great stoic philosopher.`;
 
     const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo-16k-0613",
+      model: "gpt-3.5-turbo -16k-0613",
       messages: [
         {
           role: "system",
@@ -43,13 +44,10 @@ export async function POST(req: Request) {
       ],
       temperature: 0.2,
       max_tokens: 250,
-      stream: false,
+      stream: true,
     });
-    console.log("\nAnswer\n", response.choices[0].message.content);
-    return NextResponse.json({
-      status: 200,
-      body: response.choices[0].message.content,
-    });
+    const stream = OpenAIStream(response);
+    return new StreamingTextResponse(stream);
   } catch (error) {
     console.log("error", error);
     return NextResponse.json({ status: 500, body: "Internal Server Error" });
