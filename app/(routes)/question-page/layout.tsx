@@ -1,6 +1,7 @@
 import React from "react";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 export default async function QuestionPagelayout({
   children,
@@ -10,6 +11,14 @@ export default async function QuestionPagelayout({
   const session = await auth();
   if (!session) {
     throw new Error("Session not found");
+  }
+  const preferences = await prisma.preferences.findFirst({
+    where: {
+      userId: session.user.id ? session.user.id : "",
+    },
+  });
+  if (!preferences?.difficulty || !preferences?.type) {
+    redirect("/preferences-slider");
   }
   const IsAlreadyMade = await prisma.savequestionTimeStamps.findFirst({
     where: {
