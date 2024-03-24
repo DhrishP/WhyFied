@@ -1,6 +1,6 @@
+"use client"
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import "./App.css";
 
 const quotes = [
   "The only constant in life is change. - Heraclitus",
@@ -47,7 +47,7 @@ const Loading = () => {
     return () => clearInterval(intervalId); // Cleanup function to clear interval on unmount
   }, []);
   return (
-    <div className="loading-container">
+    <div className="loading-container flex justify-center h-screen w-screen flex-col items-center bg-[#FFF5EB]">
       <div className="spinner">
         {/* backup gif: https://i.pinimg.com/originals/92/a4/ac/92a4acc3099fdccb91e6c3447c2ed12f.gif*/}
         <Image
@@ -57,7 +57,7 @@ const Loading = () => {
           height={200}
         />
       </div>
-      <div className="quotes">
+      <div className="quotes bg-secondary p-4 text-center">
         <p>{quotes[currentQuoteIndex]}</p>
       </div>
     </div>

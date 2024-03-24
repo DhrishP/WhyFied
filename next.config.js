@@ -11,9 +11,9 @@ const withPWA = require("@ducanh2912/next-pwa").default({
 });
 
 const nextConfig = {
-  images:{
-    domains: ['ibb.co','i.ibb.co']
-  }
+  images: {
+    domains: ["ibb.co", "i.ibb.co", "cdn.discordapp.com"],
+  },
 };
 
 module.exports = withPWA(nextConfig);
