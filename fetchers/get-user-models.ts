@@ -7,7 +7,6 @@ export default async function GetUserModels(){
     if(!user){
         return null;
     }
-    console.log(user)
     const res = await prisma.userModels.findMany({
         where:{
             userId: user.id
@@ -16,6 +15,5 @@ export default async function GetUserModels(){
             model:true
         }
     })
-    console.log(res);
     return res.map(item => item.model);
 }

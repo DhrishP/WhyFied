@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 export default async function GetQuestion() {
   const user = await currentUser();
   if (!user) {
-    throw new Error("User not found");
+    return null
   }
   const getDifficulty = await prisma.preferences.findFirst({
     where: {

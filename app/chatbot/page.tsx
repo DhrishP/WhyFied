@@ -23,7 +23,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Answer } from "@/components/chatbot/answer";
+import Link from "next/link";
+import { MoveLeft } from "lucide-react";
+import styles from "@/components/chatbot/answer.module.css";
 
 type UserModels = {
   id: string;
@@ -45,7 +47,7 @@ export default function Component() {
   });
 
   const [selectedModel, setSelectedModel] = useState<UserModels[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [response, setResponse] = useState<{ sender: string; text: string }[]>(
     []
   );
@@ -61,12 +63,15 @@ export default function Component() {
   };
   useEffect(() => {
     getModels();
+    setLoading(false);
   }, []);
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     if (data.modelname === "" || data.prompt === "") {
+      setLoading(false);
       return toast("Please fill all fields properly");
     }
     if (data.prompt.length < 10) {
+      setLoading(false);
       return toast("Please provide a longer prompt");
     }
     setResponse((prev) => [...prev, { sender: "user", text: data.prompt }]);
@@ -74,7 +79,9 @@ export default function Component() {
     const getModel = selectedModel.find(
       (model) => model.name === data.modelname
     );
-    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/chatbot`, {
+    console.log("getModel", getModel);
+    const res = await fetch("/api/chatbot/answer-fetch", {
+      cache: "no-store",
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -86,6 +93,7 @@ export default function Component() {
       }),
     });
     if (!res.ok) {
+      setLoading(false);
       return toast("An error occured, please try again later");
     }
     const AnsData = res.body;
@@ -102,30 +110,52 @@ export default function Component() {
       done = done_;
       if (value) {
         const text = decoder.decode(value);
-        setResponse((prev) => [
-          ...prev,
-          { sender: "bot", text: decoder.decode(value) },
-        ]);
+        setResponse((prev) => {
+          let newResponse = [...prev];
+          if (
+            newResponse.length > 0 &&
+            newResponse[newResponse.length - 1].sender === "bot"
+          ) {
+            newResponse[newResponse.length - 1].text += text;
+          } else {
+            newResponse.push({ sender: "bot", text: text });
+          }
+          return newResponse;
+        });
       }
     }
   };
 
   return (
-    <div className="w-full min-w-full rounded-lg border border-gray-200 flex flex-col items-center  overflow-hidden h-screen">
+    <div className="w-full min-w-full rounded-lg border border-gray-200 flex flex-col items-center  overflow-scroll h-screen">
       <header className="bg-gray-50 dark:bg-gray-850 border-b border-gray-200 p-4 flex items-center justify-between w-full space-x-4">
-        <h1 className="text-lg font-semibold flex-1">Chat with your models</h1>
-        <Button size="sm">Clear</Button>
+        <div className="flex space-x-4 items-center justify-center">
+          <Link href="/question-page">
+            <MoveLeft className="w-4 h-4" />
+          </Link>
+          <h1 className="text-lg font-semibold flex-1">
+            Chat with your models
+          </h1>
+        </div>
+        <Button
+          onClick={() => {
+            setResponse([]);
+          }}
+          size="sm"
+        >
+          Clear
+        </Button>
       </header>
-      <div className="p-4 w-full h-3/4 flex-1 flex flex-col gap-4">
-        <div className="flex flex-col gap-2">
+      <div className={`p-4 w-full h-3/4 flex-1 ${response.length>1?'overflow-y-scroll':''} flex flex-col gap-4`}>
+        <div  style={{animationDelay:'0.01s'}} className={`flex flex-col gap-2 ${styles.fadeIn}`}>
           {response.map((message, index) => (
             <div
               key={index}
-              className={`rounded-xl font-semibold bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-4 text-sm max-w-[80%] ${
+              className={`rounded-xl font-semibold bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-4 text-xs max-w-[90%]  ${
                 message.sender === "bot" ? "self-start" : "self-end"
               }`}
             >
-              <Answer text={message.text} />
+              {message.text}
             </div>
           ))}
         </div>
@@ -152,6 +182,9 @@ export default function Component() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
+                        {!selectedModel.length && (
+                          <SelectItem value="loading">Loading...</SelectItem>
+                        )}
                         {selectedModel.map((model) => (
                           <SelectItem key={model.id} value={model.name}>
                             {model.name}
