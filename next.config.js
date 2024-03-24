@@ -10,6 +10,10 @@ const withPWA = require("@ducanh2912/next-pwa").default({
   cacheStartUrl: true,
 });
 
-const nextConfig = {};
+const nextConfig = {
+  images:{
+    domains: ['ibb.co','i.ibb.co']
+  }
+};
 
 module.exports = withPWA(nextConfig);
