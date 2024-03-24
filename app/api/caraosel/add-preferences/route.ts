@@ -29,6 +29,9 @@ export async function POST(req: Request) {
         Preferences:true
     }
   })
+  if (!tp) {
+    return NextResponse.json({ error: "User not found" });
+  }
   if (res) {
     return NextResponse.json({ success: "Preferences updated" },{status: 200});
   }

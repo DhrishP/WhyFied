@@ -120,6 +120,7 @@ model Model {
   searchPrompt String?
   price        Int           @default(500)
   ImageUrl     String
+  HeadImageUrl String?
   UserModels   UserModels[]
   getQuestion  getQuestion[]
 }
@@ -214,7 +215,6 @@ enum ModelName {
   Albert
   Ayn
   Nietzsche
-  Epictetus
-  Seneca
+  Thomas
   General
 }
