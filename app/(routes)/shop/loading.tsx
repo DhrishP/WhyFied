@@ -1,6 +1,6 @@
+"use client"
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import "./App.css";
 
 const quotes = [
   "The only constant in life is change. - Heraclitus",
@@ -47,17 +47,17 @@ const Loading = () => {
     return () => clearInterval(intervalId); // Cleanup function to clear interval on unmount
   }, []);
   return (
-    <div className="loading-container">
+    <div className="loading-container flex justify-center h-screen w-screen flex-col items-center bg-secondary">
       <div className="spinner">
         {/* backup gif: https://i.pinimg.com/originals/92/a4/ac/92a4acc3099fdccb91e6c3447c2ed12f.gif*/}
         <Image
           src="https://cdn.discordapp.com/attachments/890194603272179763/1221509905475698759/loading-unscreen.gif?ex=6612d6c0&is=660061c0&hm=336c8fbce03641841e75a58d7d74f3c7c0effa7fda27b6398b73a0713102dc14&"
           alt="Loading"
-          width={200}
-          height={200}
+          width={150}
+          height={150}
         />
       </div>
-      <div className="quotes">
+      <div className="quotes bg-secondary p-4 text-center">
         <p>{quotes[currentQuoteIndex]}</p>
       </div>
     </div>

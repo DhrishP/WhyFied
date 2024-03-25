@@ -34,6 +34,8 @@ const quotes = [
   "The road to success and the road to failure are almost exactly the same. - Colin R. Davis",
   "Success usually comes to those who are too busy to be looking for it. - Henry David Thoreau",
   "Don't be pushed around by the fears in your mind. Be led by the dreams in your heart. - Roy T. Bennett",
+  "The only limit to our realization of tomorrow will be our doubts of today. - Franklin D. Roosevelt",
+  
 ];
 
 const Loading = () => {
@@ -47,14 +49,14 @@ const Loading = () => {
     return () => clearInterval(intervalId); // Cleanup function to clear interval on unmount
   }, []);
   return (
-    <div className="loading-container flex justify-center h-screen w-screen flex-col items-center bg-[#FFF5EB]">
+    <div className="loading-container flex justify-center h-screen w-screen flex-col items-center bg-secondary">
       <div className="spinner">
         {/* backup gif: https://i.pinimg.com/originals/92/a4/ac/92a4acc3099fdccb91e6c3447c2ed12f.gif*/}
         <Image
           src="https://cdn.discordapp.com/attachments/890194603272179763/1221509905475698759/loading-unscreen.gif?ex=6612d6c0&is=660061c0&hm=336c8fbce03641841e75a58d7d74f3c7c0effa7fda27b6398b73a0713102dc14&"
           alt="Loading"
-          width={200}
-          height={200}
+          width={150}
+          height={150}
         />
       </div>
       <div className="quotes bg-secondary p-4 text-center">
