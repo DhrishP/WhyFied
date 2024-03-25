@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
 import {
   SelectValue,
   SelectTrigger,
@@ -26,6 +25,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { MoveLeft } from "lucide-react";
 import styles from "@/components/chatbot/answer.module.css";
+import NeoButton from "@/components/ui/neo-brutalist/button";
 
 type UserModels = {
   id: string;
@@ -137,14 +137,7 @@ export default function Component() {
             Chat with your models
           </h1>
         </div>
-        <Button
-          onClick={() => {
-            setResponse([]);
-          }}
-          size="sm"
-        >
-          Clear
-        </Button>
+        <NeoButton onClick={() => {setResponse([])}} size="sm" buttonText="Clear" color={"lime"} />
       </header>
       <div className={`p-4 w-full h-3/4 flex-1 ${response.length>1?'overflow-y-scroll':''} flex flex-col gap-4`}>
         <div  style={{animationDelay:'0.01s'}} className={`flex flex-col gap-2 ${styles.fadeIn}`}>
@@ -201,14 +194,13 @@ export default function Component() {
                 name="prompt"
                 render={({ field }) => (
                   <FormItem>
-                    <Input {...field} placeholder="Your question.." />
+                    <Input className="text-lime-600" {...field} placeholder="Your question.." />
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button disabled={loading} type="submit">
-                Send
-              </Button>
+              <NeoButton color="lime" type="submit"  buttonText="Send"  disabled={loading} />
+
             </form>
           </Form>
         </div>
