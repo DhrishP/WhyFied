@@ -8,6 +8,7 @@ type ButtonType = {
   disabled?: boolean;
   className?: string;
   onClick?: () => void;
+  type?: "submit" | "reset" | "button" | undefined
 };
 
 const NeoButton = ({
@@ -17,7 +18,8 @@ const NeoButton = ({
   color = "cyan",
   disabled,
   className,
-  onClick
+  onClick,
+  type
 }: ButtonType) => {
   return (
     <button
@@ -56,9 +58,15 @@ const NeoButton = ({
         { "rounded-none": rounded === "none" },
         { "rounded-md": rounded === "md" },
         { "rounded-full": rounded === "full" },
-        { "h-10 px-4 hover:shadow-[2px_2px_0px_rgba(0,0,0,1)]": size === "sm" },
-        { "h-12 px-5 hover:shadow-[2px_2px_0px_rgba(0,0,0,1)]": size === "md" },
-        { "h-14 px-5 hover:shadow-[4px_4px_0px_rgba(0,0,0,1)]": size === "lg" },
+        {
+          "h-10 px-4 shadow-[2px_2px_0px_rgba(0,0,0,1)] hover:border-b-[1px]":
+            size === "sm",
+        },
+        {
+          "h-12 px-5 shadow-[2px_2px_0px_rgba(0,0,0,1)] hover:border-b-[1px]":
+            size === "md",
+        },
+        { "h-14 px-5 shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:border-b-[1px]": size === "lg" },
         {
           "border-[#727272] bg-[#D4D4D4] text-[#676767] hover:bg-[#D4D4D4] hover:shadow-none active:bg-[#D4D4D4]":
             disabled,
@@ -66,6 +74,7 @@ const NeoButton = ({
         className
       )}
       disabled={disabled}
+      type={type}
     >
       {buttonText}
     </button>

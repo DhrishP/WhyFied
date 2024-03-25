@@ -15,18 +15,21 @@ const DrawerComponent = ({
   buttonText,
   title,
   description,
+  className
 }: {
   children: React.ReactNode;
   buttonText: string;
   title: string;
   description: string;
+  className?: string;
 }) => {
   return (
     <Drawer>
-      <DrawerTrigger>
+      <DrawerTrigger className={className} asChild>
         <NeoButton
-          color="yellow"
-          rounded="md"
+        className="self-center"
+          color="lime"
+          rounded="none"
           size="sm"
           buttonText={buttonText}
         />
@@ -36,7 +39,7 @@ const DrawerComponent = ({
           <DrawerTitle>{title}</DrawerTitle>
           <DrawerClose>Close</DrawerClose>
         </DrawerHeader>
-        <DrawerDescription>{description}</DrawerDescription>
+        <DrawerDescription className="pl-3">{description}</DrawerDescription>
         {children}
       </DrawerContent>
     </Drawer>
