@@ -1,16 +1,10 @@
 "use client";
 import React from "react";
-import { Card, CardContent, CardTitle } from "../ui/card";
-import { Button } from "../ui/button";
-import axios from "axios";
-import { toast } from "sonner";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
+import { $Enums } from "@prisma/client";
+import NeoButton from "../ui/neo-brutalist/button";
+import { TextGenerateEffect } from "../generate-text";
+import { FaQuestionCircle } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 const DisplayQuestion = ({
   questions,
@@ -20,73 +14,53 @@ const DisplayQuestion = ({
     question: string;
     difficulty: string;
     modelId: string;
+    type: $Enums.Types;
+    createdAt: Date;
+    updatedAt: Date;
   }[];
 }) => {
   const [questionIndex, setQuestionIndex] = React.useState(0);
-  const [answer, setAnswer] = React.useState("");
-  const [open, setOpen] = React.useState(false);
-  const onSubmit = async () => {
-    if (answer.length < 15) {
-      toast("Answer should be atleast 15 characters long");
-      return;
-    }
-    const res = await axios.post(`${process.env.NEXT_PUBLIC_APP_URL}/api/journal/add-note`, {
-      note: answer,
-      questionId: questions[questionIndex].id,
-    });
-    if (res.status === 200) {
-      toast("Answer Submitted");
-      setOpen(true);
-    }
-  };
+  const router = useRouter();
+
   return (
     <>
-      <Dialog
-        open={open}
-        onOpenChange={() => {
-          setOpen(false);
-        }}
-      >
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Answer Submitted</DialogTitle>
-            <DialogDescription>
-              Here&apos;s your reward for thinking today !
-            </DialogDescription>
-          </DialogHeader>
-          <div>tp</div>
-        </DialogContent>
-      </Dialog>
-      <Card className="mt-10 font-bold flex items-center justify-center mx-auto  h-40 w-3/4 ">
-        <CardContent>
-          <CardTitle>Todays Question</CardTitle>
-          <div>{questions[questionIndex].question}</div>
-        </CardContent>
-      </Card>
-      <Button
-        className="mx-auto "
-        onClick={() => {
-          if (questionIndex === questions.length - 1) {
-            setQuestionIndex(0);
-          } else {
-            setQuestionIndex(questionIndex + 1);
+      <div className="h-[70vh] flex flex-col items-center justify-center px-6  text-6xl font-bold ">
+        <TextGenerateEffect words={questions[questionIndex].question} />
+        <button
+          onClick={() => {
+            if (questionIndex === questions.length - 1) {
+              setQuestionIndex(0);
+            } else {
+              setQuestionIndex(questionIndex + 1);
+            }
+          }}
+          className="flex items-center justify-center mt-4"
+        >
+          <span className="text-sm text-gray-500">{questionIndex + 1}/3</span>
+          <FaQuestionCircle className="h-4 w-4 ml-1 animate-spin" />
+        </button>
+      </div>
+
+      <div className=" space-y-4 w-full flex flex-col items-center justify-center">
+        <NeoButton
+          buttonText="Write✍️"
+          color="violet"
+          onClick={() =>
+            router.push(
+              `/question-page/${questions[questionIndex].id}?questionId2=${
+                questions[(questionIndex + 2) % questions.length].id
+              }&&questionId3=${
+                questions[(questionIndex + 1) % questions.length].id
+              }`
+            )
           }
-        }}
-      >
-        Next Question
-      </Button>
-      <div className="mt-40 w-full flex flex-col items-center justify-center">
-        <textarea
-          value={answer}
-          onChange={(e) => setAnswer(e.target.value)}
-          rows={6}
-          cols={50}
-          placeholder="Enter your answer"
-          className="border-2 border-black "
+          className="self-center w-5/6"
         />
-        <Button onClick={onSubmit} className="mt-5">
-          Submit
-        </Button>
+        <NeoButton
+          buttonText="Ponder🤔"
+          color="lime"
+          className="self-center w-5/6"
+        />
       </div>
     </>
   );
