@@ -4,8 +4,9 @@ import DisplayQuestion from "@/components/question-page/display-question";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import DisplayQuestionAns from "@/components/question-page/display-questionAns";
 
-const QestionPage = async () => {
+const QuestionPage = async () => {
   const session = await auth();
   if (!session?.user) {
     redirect("/auth/login");
@@ -17,13 +18,17 @@ const QestionPage = async () => {
     },
   });
   if (IsAlreadyAns) {
+    return <DisplayQuestionAns/>
+  }
+  const getQuestion = await GetQuestion();
+  if (!getQuestion) {
     return (
+
       <div className="animate-pulse text-6xl font-extrabold text-center h-screen">
-        Come back tomorrow to get more questions , till then keep thinking !
+        Something went wrong , please try again later
       </div>
     );
   }
-  const getQuestion = await GetQuestion();
   return (
     <>
       <DisplayQuestion questions={getQuestion} />
@@ -31,4 +36,4 @@ const QestionPage = async () => {
   );
 };
 
-export default QestionPage;
+export default QuestionPage;
