@@ -105,7 +105,7 @@ const OptionsCaraosel = () => {
   return (
     <Carousel className="w-screen  h-screen flex items-center justify-center">
       <CarouselContent className="w-full h-full">
-        <CarouselItem className="bg-red-300 w-screen h-screen flex flex-col space-y-4 items-center justify-center">
+        <CarouselItem className="bg-lime-100 w-screen h-screen flex flex-col space-y-4 items-center justify-center">
           {DifficultyArray.map((item) => (
             <SimpleNeoCard
               key={item.id}
@@ -124,7 +124,7 @@ const OptionsCaraosel = () => {
           </div>
           <CarouselNextButton buttonText="Next" />
         </CarouselItem>
-        <CarouselItem className="bg-red-300 w-screen h-screen flex flex-col space-y-4 items-center justify-center">
+        <CarouselItem className="bg-lime-100 w-screen h-screen flex flex-col space-y-4 items-center justify-center">
           {TypeArray.map((item) => (
             <SimpleNeoCard
               key={item.id}
