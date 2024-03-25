@@ -258,12 +258,45 @@ const CarouselNextButton = React.forwardRef<
   const { scrollNext } = useCarousel();
 
   return (
-    <Button ref={ref} className={className} onClick={scrollNext} {...props}>
+    <Button
+      ref={ref}
+      className={cn(
+        className,
+        ` ${
+          buttonText === "Calendar" ? "bg-purple-300 hover:hover-purple-400" : "bg-yellow-200 hover:bg-yellow-300"
+        }    text-black rounded-none`
+      )}
+      onClick={scrollNext}
+      {...props}
+    >
       {buttonText}
     </Button>
   );
 });
-CarouselNextButton.displayName = "CarouselNextBelow";
+CarouselNextButton.displayName = "CarouselNextButton";
+
+const CarouselPreviousButton = React.forwardRef<
+  HTMLButtonElement,
+  React.ComponentProps<typeof Button> & { buttonText?: string }
+>(({ className, buttonText = "Previous", ...props }, ref) => {
+  const { scrollPrev } = useCarousel();
+
+  return (
+    <Button
+      ref={ref}
+      variant={"ghost"}
+      className={cn(
+        className,
+        "bg-yellow-200 hover:bg-yellow-300 text-black rounded-none"
+      )}
+      onClick={scrollPrev}
+      {...props}
+    >
+      {buttonText}
+    </Button>
+  );
+});
+CarouselPreviousButton.displayName = "CarouselPreviousButton";
 
 export {
   type CarouselApi,
@@ -273,4 +306,5 @@ export {
   CarouselPrevious,
   CarouselNext,
   CarouselNextButton,
+  CarouselPreviousButton,
 };
