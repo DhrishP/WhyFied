@@ -37,10 +37,10 @@ export function CalendarComponent() {
     fetchDates();
   }, []);
   const onselect = async (date: Date) => {
-    setLoading(true);
     if (
       dates.find((d) => d.toLocaleDateString() === date.toLocaleDateString())
     ) {
+      setLoading(true);
       const updatedDate = date.toLocaleDateString("en-GB", {
         day: "2-digit",
         month: "2-digit",
@@ -63,12 +63,13 @@ export function CalendarComponent() {
       }
       router.push(`/journal/${journalByDate.id}`);
     } else {
-      return toast.error("No Entries found");
+      toast.warning("No Entries found");
+      return;
     }
   };
 
   if (loading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   return (
