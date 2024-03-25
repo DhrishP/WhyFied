@@ -18,19 +18,19 @@ model User {
   role                  UserRole               @default(USER)
   coins                 Int                    @default(0)
   createdAt             DateTime               @default(now())
-  promptTokes           Int                    @default(3)
   isTwoFactorEnabled    Boolean                @default(false)
   Streak                Int                    @default(0)
+  promptTokes           Int                    @default(3)
   accounts              Account[]
   Achievement           Achievement[]
   JournalEntries        JournalEntries[]
   Preferences           Preferences?
+  Quotes                Quotes[]
   SmallWin              SmallWin[]
   twoFactorConfirmation TwoFactorConfirmation?
   UserModels            UserModels[]
   UserQuestion          UserQuestion[]
   profilePictures       profilePictures[]
-  Quotes                Quotes[]
 }
 
 model profilePictures {
@@ -114,26 +114,25 @@ model Achievement {
 }
 
 model Model {
-  id                 String    @id @default(cuid())
+  id                 String        @id @default(cuid())
   name               ModelName
-  fullName           String    @default("hw")
-  shopdescription    String    @default("hw")
   description        String
   searchPrompt       String?
-  price              Int       @default(500)
   ImageUrl           String
+  price              Int           @default(500)
   HeadImageUrl       String?
-  Sarcasm            Int?
-  EaseToUnderstand   Int?
   ContextSensitivity Int?
-
-  UserModels  UserModels[]
-  getQuestion getQuestion[]
+  EaseToUnderstand   Int?
+  Sarcasm            Int?
+  fullName           String        @default("hw")
+  shopdescription    String        @default("hw")
+  UserModels         UserModels[]
+  getQuestion        getQuestion[]
 }
 
 model JournalEntries {
   id            String      @id @default(cuid())
-  date          DateTime    @default(now())
+  date          String
   userId        String
   getQuestionId String
   perspective1  String
@@ -156,8 +155,8 @@ model SmallWin {
 model Preferences {
   id         String     @id @default(cuid())
   userId     String     @unique
-  difficulty Difficulty
   type       Types
+  difficulty Difficulty
   user       User       @relation(fields: [userId], references: [id])
 
   @@unique([type, userId])
@@ -178,11 +177,11 @@ model getQuestion {
   difficulty     String
   modelId        String
   type           Types
-  UserQuestion   UserQuestion[]
-  model          Model            @relation(fields: [modelId], references: [id])
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @default(now()) @updatedAt
   JournalEntries JournalEntries[]
+  UserQuestion   UserQuestion[]
+  model          Model            @relation(fields: [modelId], references: [id])
 }
 
 model savequestionTimeStamps {
