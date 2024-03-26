@@ -2,7 +2,9 @@
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+
 export async function POST(req: Request) {
+
   const session = await auth();
   if (!session?.user) {
     return NextResponse.json({ status: 401, body: "Unauthorized" });
@@ -16,7 +18,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ status: 400, body: "Bad Request" });
   }
   const res = await prisma.preferences.create({
-    data: {
+    data: { 
       userId: user.id,
       type,
       difficulty,

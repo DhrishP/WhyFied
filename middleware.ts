@@ -25,6 +25,9 @@ export default auth((req) => {
     }
     return;
   }
+  if(!isLoggedIn && nextUrl.pathname === "/"){
+    return Response.redirect(new URL("/landing-slider", nextUrl));
+  }
 
   if (!isLoggedIn && !isPublicRoute) {
     console.log(isLoggedIn)
@@ -41,9 +44,7 @@ export default auth((req) => {
   if(isLoggedIn && nextUrl.pathname === "/"){
     return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
   }
-  if(!isLoggedIn && nextUrl.pathname === "/"){
-    return Response.redirect(new URL("/auth/login", nextUrl));
-  }
+  
 
   return;
 });

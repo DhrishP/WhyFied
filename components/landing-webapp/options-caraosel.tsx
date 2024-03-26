@@ -8,12 +8,14 @@ import {
 } from "@/components/ui/carousel";
 import SimpleNeoCard from "../ui/neo-brutalist/simple-neo-card";
 import NeoButton from "../ui/neo-brutalist/button";
-import axios from "axios";
+
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const OptionsCaraosel = () => {
+  const router = useRouter()
   const [isActive, setIsActive] = React.useState({
-    beginner: false,
+    easy: false,
     intermediate: false,
     hardcore: false,
   });
@@ -24,10 +26,10 @@ const OptionsCaraosel = () => {
   const DifficultyArray = [
     {
       id: 1,
-      title: "Beginner",
+      title: "Easy",
       description: "You are new to philosophy and self reflecting",
       onClick: () => {
-        onClick("beginner");
+        onClick("easy");
       },
     },
     {
@@ -70,7 +72,7 @@ const OptionsCaraosel = () => {
 
   const onClick = (type: string) => {
     setIsActive({
-      beginner: false,
+      easy: false,
       intermediate: false,
       hardcore: false,
       [type]: true,
@@ -91,15 +93,22 @@ const OptionsCaraosel = () => {
       (key) => isTypeActive[key as keyof typeof isTypeActive]
     );
     if (!getDifficulty || !getType)
-      return alert("Please select a difficulty and type");
-    const response = await axios.post("/api/add-preferences", {
-      type: getType,
-      difficulty: getDifficulty,
+      return toast.error("Please select difficulty and type");
+    const response = await fetch("/api/sliding/add-preferences", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        difficulty: getDifficulty,
+        type: getType,
+      }),
     });
     if (response.status === 200) {
-      toast(response.data);
+      toast.success("Preferences added");
+      router.push('/question-page')
     } else {
-      toast(response.data);
+      toast.error("Something went wrong");
     }
   };
   return (
@@ -119,11 +128,11 @@ const OptionsCaraosel = () => {
             />
           ))}
           <div className="flex w-full relative top-28 flex-col space-y-4 items-center justify-center">
-          <div className="space-x-2 flex">
-            <div className={`bg-lime-300 rounded-full w-4 h-3`}></div>
-            <div className={`bg-black rounded-full w-3 h-3`}></div>
-          </div>
-          <CarouselNextButton2 className="w-full" buttonText="Next" />
+            <div className="space-x-2 flex">
+              <div className={`bg-lime-300 rounded-full w-4 h-3`}></div>
+              <div className={`bg-black rounded-full w-3 h-3`}></div>
+            </div>
+            <CarouselNextButton2 className="w-full" buttonText="Next" />
           </div>
         </CarouselItem>
         <CarouselItem className="bg-lime-100 w-screen h-screen flex flex-col space-y-4 items-center justify-center">
@@ -142,17 +151,16 @@ const OptionsCaraosel = () => {
             />
           ))}
           <div className="  flex w-full relative top-40 flex-col space-y-4 items-center justify-center">
-          <div className="space-x-2 flex">
-          
-            <div className={`bg-black rounded-full w-3 h-3`}></div>
-            <div className={`bg-lime-300 rounded-full w-4 h-3`}></div>
-          </div>
-          <NeoButton
-            onClick={onSubmit}
-            color="lime"
-            rounded="md"
-            buttonText="Let's Start Thinking"
-          />
+            <div className="space-x-2 flex">
+              <div className={`bg-black rounded-full w-3 h-3`}></div>
+              <div className={`bg-lime-300 rounded-full w-4 h-3`}></div>
+            </div>
+            <NeoButton
+              onClick={onSubmit}
+              color="lime"
+              rounded="md"
+              buttonText="Let's Start Thinking"
+            />
           </div>
         </CarouselItem>
       </CarouselContent>
