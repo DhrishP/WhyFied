@@ -1,3 +1,4 @@
+import CoinImage from "@/components/coin-image";
 import classNames from "classnames";
 
 type ButtonType = {
@@ -8,7 +9,8 @@ type ButtonType = {
   disabled?: boolean;
   className?: string;
   onClick?: () => void;
-  type?: "submit" | "reset" | "button" | undefined
+  type?: "submit" | "reset" | "button" | undefined,
+  shouldshowCoin?: boolean
 };
 
 const NeoButton = ({
@@ -19,13 +21,14 @@ const NeoButton = ({
   disabled,
   className,
   onClick,
-  type
+  type,
+  shouldshowCoin=false
 }: ButtonType) => {
   return (
     <button
       onClick={onClick}
       className={classNames(
-        "border-black border-2",
+        "border-black border-2 space-x-1.5",
 
         {
           "bg-violet-200 hover:bg-violet-300 active:bg-violet-400":
@@ -76,7 +79,9 @@ const NeoButton = ({
       disabled={disabled}
       type={type}
     >
-      {buttonText}
+      
+      <h3>{buttonText}</h3>
+      {shouldshowCoin? <CoinImage height={20} width={20}/> : null}
     </button>
   );
 };

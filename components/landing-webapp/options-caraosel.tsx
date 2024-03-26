@@ -4,7 +4,7 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNextButton,
+  CarouselNextButton2,
 } from "@/components/ui/carousel";
 import SimpleNeoCard from "../ui/neo-brutalist/simple-neo-card";
 import NeoButton from "../ui/neo-brutalist/button";
@@ -118,11 +118,13 @@ const OptionsCaraosel = () => {
               onClick={item.onClick}
             />
           ))}
+          <div className="flex w-full relative top-28 flex-col space-y-4 items-center justify-center">
           <div className="space-x-2 flex">
-            <div className={`bg-white rounded-full w-4 h-3`}></div>
+            <div className={`bg-lime-300 rounded-full w-4 h-3`}></div>
             <div className={`bg-black rounded-full w-3 h-3`}></div>
           </div>
-          <CarouselNextButton buttonText="Next" />
+          <CarouselNextButton2 className="w-full" buttonText="Next" />
+          </div>
         </CarouselItem>
         <CarouselItem className="bg-lime-100 w-screen h-screen flex flex-col space-y-4 items-center justify-center">
           {TypeArray.map((item) => (
@@ -139,9 +141,11 @@ const OptionsCaraosel = () => {
               onClick={item.onClick}
             />
           ))}
+          <div className="  flex w-full relative top-40 flex-col space-y-4 items-center justify-center">
           <div className="space-x-2 flex">
-            <div className={`bg-white rounded-full w-4 h-3`}></div>
+          
             <div className={`bg-black rounded-full w-3 h-3`}></div>
+            <div className={`bg-lime-300 rounded-full w-4 h-3`}></div>
           </div>
           <NeoButton
             onClick={onSubmit}
@@ -149,6 +153,7 @@ const OptionsCaraosel = () => {
             rounded="md"
             buttonText="Let's Start Thinking"
           />
+          </div>
         </CarouselItem>
       </CarouselContent>
     </Carousel>

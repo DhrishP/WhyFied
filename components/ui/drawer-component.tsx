@@ -32,6 +32,7 @@ const DrawerComponent = ({
           rounded="none"
           size="sm"
           buttonText={buttonText}
+          shouldshowCoin={true}
         />
       </DrawerTrigger>
       <DrawerContent className="lg:mx-20 ">

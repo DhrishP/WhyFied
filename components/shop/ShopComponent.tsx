@@ -140,15 +140,15 @@ const ShopComponent = ({ models }: ShopComponentProps) => {
                     <div className="absolute bottom-0 left-0 transform translate-y-1/2 w-full h-1/2 bg-gradient-to-t from-slate-300 to-transparent rounded-full opacity-80 z-20 "></div>
                   </div>
                   <div className="flex w-1/2 flex-col ">
-                    <h2 className=" text-start font-bold text-lg">
+                    <h2 className=" text-center font-bold  text-lg">
                       {model.fullName}
                     </h2>
-                    <h4 className="font-desc text-sm my-2">{model.shopdescription}</h4>
+                    <h4 className="font-desc text-center text-sm my-2">{model.shopdescription}</h4>
                     <NeoButton
                       disabled={loading}
                       buttonText="Buy Now"
                       color="lime"
-                      className="w-5/6"
+                      className="w-[80%] mt-4 self-center"
                       onClick={() => {
                         onSubmit(model.id, model.price);
                       }}
