@@ -22,8 +22,17 @@ export async function POST(req: Request) {
       difficulty,
     },
   });
-  if (res) {
-    return NextResponse.json({ status: 200, body: "Preferences added" });
+  if (!res) {
+    return NextResponse.json({ status: 500, body: "Internal Server Error" });
   }
-  return NextResponse.json({ status: 500, body: "Internal Server Error" });
+  const res2 = await prisma.userModels.create({
+    data:{
+      modelId: '1',
+      userId: user.id,
+    }
+  })
+  if (!res2) {
+    return NextResponse.json({ status: 500, body: "Internal Server Error" });
+  }
+  return NextResponse.json({ status: 200, body: "Preferences added" });
 }
