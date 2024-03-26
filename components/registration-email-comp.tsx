@@ -4,14 +4,12 @@ import NeoButton from "@/components/ui/neo-brutalist/button";
 import { useState, useTransition } from "react";
 import { toast } from "sonner";
 import registerEmail from "@/actions/registerEmail";
-import { useRouter } from "next/navigation";
 const font = Poppins({
   subsets: ["latin"],
   weight: ["600"],
 });
 
-export default function Home() {
-  const router = useRouter();
+export default function RegisterFormComponent() {
   const [email, setEmail] = useState("");
   const [isPending, startTransition] = useTransition();
 

@@ -13,13 +13,14 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,  
+  FormMessage,
 } from "@/components/ui/form";
-import { CardWrapper } from "@/components/auth/card-wrapper"
+import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { reset } from "@/actions/reset";
+import NeoButton from "../ui/neo-brutalist/button";
 
 export const ResetForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -38,11 +39,10 @@ export const ResetForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      reset(values)
-        .then((data) => {
-          setError(data?.error);
-          setSuccess(data?.success);
-        });
+      reset(values).then((data) => {
+        setError(data?.error);
+        setSuccess(data?.success);
+      });
     });
   };
 
@@ -53,10 +53,7 @@ export const ResetForm = () => {
       backButtonHref="/auth/login"
     >
       <Form {...form}>
-        <form 
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-4">
             <FormField
               control={form.control}
@@ -66,6 +63,7 @@ export const ResetForm = () => {
                   <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input
+                      className="bg-secondary color-primary"
                       {...field}
                       disabled={isPending}
                       placeholder="john.doe@example.com"
@@ -79,13 +77,13 @@ export const ResetForm = () => {
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          <Button
-            disabled={isPending}
+          <NeoButton
+            color="lime"
+            buttonText={"Send reset email"}
             type="submit"
-            className="w-full"
-          >
-            Send reset email
-          </Button>
+            className="w-full bg-lime-300 hover:bg-lime-400"
+            disabled={isPending}
+          />
         </form>
       </Form>
     </CardWrapper>

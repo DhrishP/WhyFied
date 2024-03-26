@@ -14,13 +14,14 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,  
+  FormMessage,
 } from "@/components/ui/form";
-import { CardWrapper } from "@/components/auth/card-wrapper"
+import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { newPassword } from "@/actions/new-password";
+import NeoButton from "../ui/neo-brutalist/button";
 
 export const NewPasswordForm = () => {
   const searchParams = useSearchParams();
@@ -42,11 +43,10 @@ export const NewPasswordForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      newPassword(values, token)
-        .then((data) => {
-          setError(data?.error);
-          setSuccess(data?.success);
-        });
+      newPassword(values, token).then((data) => {
+        setError(data?.error);
+        setSuccess(data?.success);
+      });
     });
   };
 
@@ -57,10 +57,7 @@ export const NewPasswordForm = () => {
       backButtonHref="/auth/login"
     >
       <Form {...form}>
-        <form 
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-4">
             <FormField
               control={form.control}
@@ -70,6 +67,7 @@ export const NewPasswordForm = () => {
                   <FormLabel>Password</FormLabel>
                   <FormControl>
                     <Input
+                      className="bg-secondary color-primary"
                       {...field}
                       disabled={isPending}
                       placeholder="******"
@@ -83,13 +81,13 @@ export const NewPasswordForm = () => {
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          <Button
-            disabled={isPending}
+          <NeoButton
+            color="lime"
+            buttonText={"Reset Password"}
             type="submit"
-            className="w-full"
-          >
-            Reset password
-          </Button>
+            className="w-full bg-lime-300 hover:bg-lime-400"
+            disabled={isPending}
+          />
         </form>
       </Form>
     </CardWrapper>

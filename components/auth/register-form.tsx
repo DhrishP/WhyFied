@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { register } from "@/actions/register";
+import NeoButton from "../ui/neo-brutalist/button";
 
 export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -69,6 +70,7 @@ export const RegisterForm = () => {
                   <FormLabel>Name</FormLabel>
                   <FormControl>
                     <Input
+                    className="bg-secondary color-primary"
                       {...field}
                       disabled={isPending}
                       placeholder="John Doe"
@@ -86,6 +88,7 @@ export const RegisterForm = () => {
                   <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input
+                    className="bg-secondary color-primary"
                       {...field}
                       disabled={isPending}
                       placeholder="john.doe@example.com"
@@ -104,6 +107,7 @@ export const RegisterForm = () => {
                   <FormLabel>Password</FormLabel>
                   <FormControl>
                     <Input
+                    className="bg-secondary color-primary"
                       {...field}
                       disabled={isPending}
                       placeholder="******"
@@ -117,13 +121,13 @@ export const RegisterForm = () => {
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          <Button
-            disabled={isPending}
+          <NeoButton
+            color="lime"
+            buttonText={"Create an account"}
             type="submit"
-            className="w-full"
-          >
-            Create an account
-          </Button>
+            className="w-full bg-lime-300 hover:bg-lime-400"
+            disabled={isPending}
+          />
         </form>
       </Form>
     </CardWrapper>
