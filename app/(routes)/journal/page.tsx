@@ -1,4 +1,4 @@
-
+import HamburgerDrawer from "@/components/hamburger-drawer";
 import { CalendarComponent } from "@/components/journal/calendarComponent";
 import RecentJournalComponent from "@/components/journal/recentComponent";
 import {
@@ -15,8 +15,8 @@ export default async function Component() {
   return (
     <>
       <Carousel>
-        <nav className="border-b-4">
-          <ul className="flex justify-center space-x-4 py-4">
+        <nav className="border-b-4 flex items-center justify-evenly">
+          <ul className="flex justify-center space-x-4 py-4 w-[100vw]">
             <li>
               <CarouselPreviousButton buttonText="Recent" />
             </li>
@@ -24,6 +24,9 @@ export default async function Component() {
               <CarouselNextButton buttonText="Calendar" />
             </li>
           </ul>
+          <div className="relative right-4">
+            <HamburgerDrawer />
+          </div>
         </nav>
         <CarouselContent>
           <CarouselItem>
@@ -32,29 +35,10 @@ export default async function Component() {
             </div>
           </CarouselItem>
           <CarouselItem>
-            <CalendarComponent/>
+            <CalendarComponent />
           </CarouselItem>
         </CarouselContent>
       </Carousel>
     </>
-  );
-}
-
-function CircleIcon(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="12" cy="12" r="10" />
-    </svg>
   );
 }
