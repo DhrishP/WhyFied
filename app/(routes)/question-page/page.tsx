@@ -6,6 +6,8 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import DisplayQuestionAns from "@/components/question-page/display-questionAns";
 
+
+
 const QuestionPage = async () => {
   const session = await auth();
   if (!session?.user) {
