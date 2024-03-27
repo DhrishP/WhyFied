@@ -32,7 +32,6 @@ const QuestionIdPage = ({ params }: { params: { questionId: string } }) => {
   const [loading, setLoading] = useState(false);
 
   React.useEffect(() => {
-
     const fetchQuestion = async () => {
       const fetchedQuestion = await getQuestionById(params.questionId);
       if (!fetchedQuestion) {
@@ -55,11 +54,11 @@ const QuestionIdPage = ({ params }: { params: { questionId: string } }) => {
 
   const handleAddPerspective = () => {
     if (perspectives[perspectives.length - 1] === "")
-      return toast(
+      return toast.error(
         "Please fill the current perspective before adding a new one"
       );
     if (perspectives[perspectives.length - 1].length < 15)
-      return toast("Please try to add thought to the perspective");
+      return toast.error("Please try to add thought to the perspective");
     setPerspectives([...perspectives, ""]);
   };
 
@@ -82,14 +81,14 @@ const QuestionIdPage = ({ params }: { params: { questionId: string } }) => {
         questionArray: [params.questionId, questionId2, questionId3],
       }),
     });
-    if(res.status !== 200){
-      toast.error("Something went wrong")
-      setLoading(false)
+    if (res.status !== 200) {
+      toast.error("Something went wrong");
+      setLoading(false);
     }
-    if(res.status === 200){
-      toast.success("Answer Submitted")
-      setOpen(true)
-      setLoading(false)
+    if (res.status === 200) {
+      toast.success("Answer Submitted");
+      setOpen(true);
+      setLoading(false);
     }
   };
 
@@ -98,9 +97,8 @@ const QuestionIdPage = ({ params }: { params: { questionId: string } }) => {
       <Dialog
         open={open}
         onOpenChange={() => {
-          router.push('/question-page')
+          router.push("/question-page");
           setOpen(false);
-          
         }}
       >
         <DialogContent className="w-[90vw]">
@@ -139,10 +137,10 @@ const QuestionIdPage = ({ params }: { params: { questionId: string } }) => {
             <div className="flex flex-col items-center justify-center space-y-4 w-full">
               <NeoButton
                 onClick={handleAddPerspective}
-                buttonText="Add perspective"
+                buttonText="+Add perspective"
                 type="button"
                 color="lime"
-                className=" text-3xl font-semibold self-center text-center  "
+                className=" font-semibold self-center text-center  "
               />
             </div>
           )}
@@ -152,7 +150,7 @@ const QuestionIdPage = ({ params }: { params: { questionId: string } }) => {
               buttonText="Submit"
               type="submit"
               color="violet"
-              className="  text-center w-3/4 "
+              className="  text-center font- text-lg w-3/4 "
             />
           </div>
         </form>

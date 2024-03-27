@@ -4,12 +4,11 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTransition, useState } from "react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 import { Switch } from "@/components/ui/switch";
 import { SettingsSchema } from "@/schemas";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { settings } from "@/actions/settings";
 import {
   Form,
@@ -24,7 +23,9 @@ import { Input } from "@/components/ui/input";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
-import { UserRole } from "@prisma/client";
+import NeoButton from "@/components/ui/neo-brutalist/button";
+import { Button } from "@/components/ui/button";
+import { logout } from "@/actions/logout";
 
 const SettingsPage = () => {
   const user = useCurrentUser();
@@ -64,9 +65,11 @@ const SettingsPage = () => {
   };
 
   return (
-    <Card className="w-[600px]">
+    <Card className="lg:w-[600px] w-[100%] py-10 h-full  bg-slate-200">
       <CardHeader>
-        <p className="text-2xl font-semibold text-center">⚙️ Settings</p>
+        <p className="text-2xl font-semibold text-center text-gray-700">
+          ⚙️ Settings
+        </p>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -161,6 +164,7 @@ const SettingsPage = () => {
                       </div>
                       <FormControl>
                         <Switch
+                          className="data-[state=checked]:bg-primary"
                           disabled={isPending}
                           checked={field.value}
                           onCheckedChange={field.onChange}
@@ -173,9 +177,25 @@ const SettingsPage = () => {
             </div>
             <FormError message={error} />
             <FormSuccess message={success} />
-            <Button disabled={isPending} type="submit">
-              Save
-            </Button>
+            <div className="flex w-screen  justify-end  items-end px-12">
+              <Button
+                type="submit"
+                onClick={() => {
+                  logout();
+                }}
+                className=""
+                disabled={isPending}
+              >
+                Logout👋
+              </Button>
+            </div>
+            <NeoButton
+              color="lime"
+              buttonText={"Save"}
+              type="submit"
+              className="w-full bg-lime-300 hover:bg-lime-400"
+              disabled={isPending}
+            />
           </form>
         </Form>
       </CardContent>
