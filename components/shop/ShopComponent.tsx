@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/dialog";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import HamburgerDrawer from "../hamburger-drawer";
 type ShopComponentProps = {
   models: {
     id: string;
@@ -94,10 +95,10 @@ const ShopComponent = ({ models }: ShopComponentProps) => {
       </Dialog>
       <header className="bg-gray-50 w-screen h-[10vh]  dark:bg-gray-850 border-b border-gray-200 p-4 flex items-center justify-between  space-x-4">
         <div className="flex space-x-4 items-center justify-center">
-          <Link className="no-underline" href="/question-page">
-            <MoveLeft className="w-4 h-5" />
-          </Link>
           <h1 className="text-lg font-semibold flex-1">Shop</h1>
+        </div>
+        <div>
+          <HamburgerDrawer />
         </div>
         {/* <Button
           onClick={() => {
@@ -143,7 +144,9 @@ const ShopComponent = ({ models }: ShopComponentProps) => {
                     <h2 className=" text-center font-bold  text-lg">
                       {model.fullName}
                     </h2>
-                    <h4 className="font-desc text-center text-sm my-2">{model.shopdescription}</h4>
+                    <h4 className="font-desc text-center text-sm my-2">
+                      {model.shopdescription}
+                    </h4>
                     <NeoButton
                       disabled={loading}
                       buttonText="Buy Now"
