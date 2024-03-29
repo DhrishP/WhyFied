@@ -55,7 +55,7 @@ const JournalIdPage = async ({
               )}
             </CarouselItem>
             {entry.perspective3 && (
-              <CarouselItem className="text-gray-700 px-10 overflow-y-scroll">
+              <CarouselItem className="text-gray-700 px-10 relative overflow-y-scroll">
                 <h1 className="text-4xl mb-7 text-lime-400 font-bold">
                   Perspective 3
                 </h1>
@@ -67,7 +67,7 @@ const JournalIdPage = async ({
               </CarouselItem>
             )}
             {entry.perspective4 && (
-              <CarouselItem className="text-gray-700 px-10  overflow-y-scroll">
+              <CarouselItem className="text-gray-700 relative px-10  overflow-y-scroll">
                 <h1 className="text-4xl mb-7 text-lime-400 font-bold">
                   Perspective 4
                 </h1>
@@ -79,7 +79,7 @@ const JournalIdPage = async ({
               </CarouselItem>
             )}
             {entry.perspective5 && (
-              <CarouselItem className="text-gray-700 px-10 overflow-y-scroll">
+              <CarouselItem className="text-gray-700 relative px-10 overflow-y-scroll">
                 <h1 className="text-4xl mb-7 text-lime-400 font-bold">
                   Perspective 5
                 </h1>
