@@ -63,7 +63,7 @@ const DisplayQuestion = ({
       />
 
       <nav className="flex items-center justify-between px-10 pt-6">
-        <div>
+        <div >
           <h2 className=" text-2xl">WHYFIED V1</h2>
         </div>
         <div>

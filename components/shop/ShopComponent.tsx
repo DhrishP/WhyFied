@@ -120,6 +120,7 @@ const ShopComponent = ({ models }: ShopComponentProps) => {
                   alt={model.name}
                   width={300}
                   height={300}
+                  loading="lazy"
                   className="rounded-full"
                 />
                 <h2 className="font-semibold">{model.name}</h2>

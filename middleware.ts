@@ -24,6 +24,8 @@ export default auth((req) => {
       return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
     }
     return;
+  }if(isLoggedIn && nextUrl.pathname === "/"){
+    return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
   }
   if(!isLoggedIn && nextUrl.pathname === "/"){
     return Response.redirect(new URL("/landing-slider", nextUrl));
