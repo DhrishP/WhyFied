@@ -26,6 +26,10 @@ import Link from "next/link";
 import { MoveLeft } from "lucide-react";
 import styles from "@/components/chatbot/answer.module.css";
 import NeoButton from "@/components/ui/neo-brutalist/button";
+import { useCurrentUser } from "@/hooks/use-current-user";
+import { prisma } from "@/lib/prisma";
+import { auth } from "@/auth";
+import getPromptPermission from "@/fetchers/get-prompt-permission";
 
 type UserModels = {
   id: string;
@@ -51,6 +55,7 @@ export default function Component() {
   const [response, setResponse] = useState<{ sender: string; text: string }[]>(
     []
   );
+  const [blockSubmit, setBlockSubmit] = useState(false);
   const getModels = async () => {
     const fetchModels: UserModels[] | null = await getUserModels();
     if (!fetchModels) {
@@ -61,9 +66,19 @@ export default function Component() {
     }
     setSelectedModel(fetchModels);
   };
+  const isPossibleToPrompt = async () => {
+    const promptPossible = await getPromptPermission();
+    if (!promptPossible) {
+      setBlockSubmit(true);
+      return;
+    }
+    setBlockSubmit(false);
+    return;
+  };
   useEffect(() => {
     getModels();
     setLoading(false);
+    isPossibleToPrompt();
   }, []);
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     if (data.modelname === "" || data.prompt === "") {
@@ -137,10 +152,24 @@ export default function Component() {
             Chat with your models
           </h1>
         </div>
-        <NeoButton onClick={() => {setResponse([])}} size="sm" buttonText="Clear" color={"lime"} />
+        <NeoButton
+          onClick={() => {
+            setResponse([]);
+          }}
+          size="sm"
+          buttonText="Clear"
+          color={"lime"}
+        />
       </header>
-      <div className={`p-4 w-full h-3/4 flex-1 ${response.length>1?'overflow-y-scroll':''} flex flex-col gap-4`}>
-        <div  style={{animationDelay:'0.01s'}} className={`flex flex-col gap-2 ${styles.fadeIn}`}>
+      <div
+        className={`p-4 w-full h-3/4 flex-1 ${
+          response.length > 1 ? "overflow-y-scroll" : ""
+        } flex flex-col gap-4`}
+      >
+        <div
+          style={{ animationDelay: "0.01s" }}
+          className={`flex flex-col gap-2 ${styles.fadeIn}`}
+        >
           {response.map((message, index) => (
             <div
               key={index}
@@ -194,13 +223,26 @@ export default function Component() {
                 name="prompt"
                 render={({ field }) => (
                   <FormItem>
-                    <Input className="text-lime-600" {...field} placeholder="Your question.." />
+                    <Input
+                      className="text-lime-600"
+                      {...field}
+                      placeholder="Your question.."
+                    />
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <NeoButton color="lime" type="submit"  buttonText="Send"  disabled={loading} />
-
+              {blockSubmit && (
+                <p className="text-red-500">No Prompt tokens to prompt</p>
+              )}
+              {!blockSubmit && (
+                <NeoButton
+                  color="lime"
+                  type="submit"
+                  buttonText="Send"
+                  disabled={loading}
+                />
+              )}
             </form>
           </Form>
         </div>

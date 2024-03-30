@@ -1,7 +1,7 @@
 import React from "react";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 
 export const revalidate = 0;
@@ -36,9 +36,11 @@ export default async function QuestionPagelayout({
       },
     });
     if (!res) {
-      return <p>Loading...</p>;
+      notFound();
     }
   }
+  
+  
 
   return (
     <>

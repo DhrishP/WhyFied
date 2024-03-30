@@ -25,7 +25,6 @@ const QuestionPage = async () => {
   const getQuestion = await GetQuestion();
   if (!getQuestion) {
     return (
-
       <div className="animate-pulse text-6xl font-extrabold text-center h-screen">
         Something went wrong , please try again later
       </div>
