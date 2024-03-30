@@ -5,7 +5,7 @@ import Link from "next/link";
 const DisplayQuestionAns = () => {
   return (
     <div className=" text-center h-screen flex items-center justify-center flex-col space-y-8">
-      <h3 className="text-5xl px-2 text-gray-700 animate-pulse ">
+      <h3 className="text-5xl font-semibold px-2 text-gray-700 animate-pulse ">
         {" "}
         Come back tomorrow to get more questions , till then keep thinking !
       </h3>

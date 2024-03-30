@@ -6,8 +6,8 @@ type CardType = {
   description?: string;
   className?: string;
   children?: React.ReactNode;
-  isActive: boolean;
-  onClick: () => void;
+  isActive?: boolean;
+  onClick?: () => void;
 };
 
 const SimpleNeoCard = ({
