@@ -61,7 +61,7 @@ const AddQuestionsPage = () => {
         selectedModel,
         tagValue,
         difficultyModel.name,
-        session.data.user.id,
+        session.data.user.id ?? "",
         typeValue.name
       ).then((data) => {
         if (data.error) {

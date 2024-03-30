@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import React from "react"
 
 export default function Component() {
   return (
@@ -43,7 +44,7 @@ export default function Component() {
       <div className="space-y-2">
         <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">Uh oh! Something went wrong.</h1>
         <p className="max-w-[600px] mx-auto text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-          Don't worry, our team has been notified. You can try refreshing the page or return to the
+          Do not worry, our team has been notified. You can try refreshing the page or return to the
           <Link className="underline" href="#">
             homepage
           </Link>
