@@ -7,6 +7,7 @@ import {
   authRoutes,
   publicRoutes,
 } from "@/routes";
+import { redirect } from "next/navigation";
 const { auth } = NextAuth(authConfig);
 
 export default auth((req) => {
@@ -24,32 +25,33 @@ export default auth((req) => {
       return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
     }
     return;
-  }if(isLoggedIn && nextUrl.pathname === "/"){
-    return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
   }
+ 
   if(!isLoggedIn && nextUrl.pathname === "/"){
     return Response.redirect(new URL("/landing-slider", nextUrl));
   }
 
   if (!isLoggedIn && !isPublicRoute) {
-    console.log(isLoggedIn)
-    let callbackUrl = nextUrl.pathname;
-    if (nextUrl.search) {
-      callbackUrl += nextUrl.search;
-    }
-
-    const encodedCallbackUrl = encodeURIComponent(callbackUrl);
-    return Response.redirect(
-      new URL(`/auth/login?callbackUrl=${encodedCallbackUrl}`, nextUrl)
-    );
+     Response.redirect(new URL("/landing-slider", nextUrl));
   }
-  if(isLoggedIn && nextUrl.pathname === "/"){
+  if (isLoggedIn && nextUrl.pathname === "/") {
     return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
-  }
-  
+      }
+      
 
-  return;
-});
+      return;
+    });
+// if (isLoggedIn) {
+//   if (nextUrl.pathname === "/") {
+//     return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
+//   }
+// } else {
+//   if (nextUrl.pathname === "/") {
+//     return Response.redirect(new URL("/landing-slider", nextUrl));
+//   } else if (!isPublicRoute) {
+//     return Response.redirect(new URL("/landing-slider", nextUrl));
+//   }
+// }
 
 // Optionally, don't invoke Middleware on some paths
 
