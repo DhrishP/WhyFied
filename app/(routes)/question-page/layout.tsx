@@ -3,9 +3,6 @@ import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
 import { notFound, redirect } from "next/navigation";
 
-
-export const revalidate = 0;
-
 export default async function QuestionPagelayout({
   children,
 }: {
@@ -39,9 +36,6 @@ export default async function QuestionPagelayout({
       notFound();
     }
   }
-  
-  
-
   return (
     <>
       <div>{children}</div>
