@@ -25,12 +25,8 @@ import { login } from "@/actions/login";
 import NeoButton from "../ui/neo-brutalist/button";
 
 export const LoginForm = () => {
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl");
-  const urlError =
-    searchParams.get("error") === "OAuthAccountNotLinked"
-      ? "Email already in use with different provider!"
-      : "";
+
+ 
 
   const [showTwoFactor, setShowTwoFactor] = useState(false);
   const [error, setError] = useState<string | undefined>("");
@@ -50,7 +46,7 @@ export const LoginForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      login(values, callbackUrl)
+      login(values, "")
         .then((data) => {
           if (data?.error) {
             form.reset();
@@ -150,7 +146,7 @@ export const LoginForm = () => {
               </>
             )}
           </div>
-          <FormError message={error || urlError} />
+          <FormError message={error} />
           <FormSuccess message={success} />
           <NeoButton
             color="lime"
