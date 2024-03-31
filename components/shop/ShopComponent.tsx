@@ -36,7 +36,7 @@ type ShopComponentProps = {
     Sarcasm: number | null;
     EaseToUnderstand: number | null;
     ContextSensitivity: number | null;
-  }[];
+  }[] | null; 
 };
 
 const ShopComponent = ({ models }: ShopComponentProps) => {
@@ -109,7 +109,7 @@ const ShopComponent = ({ models }: ShopComponentProps) => {
       </header>
       <Carousel>
         <CarouselContent>
-          {models.map((model) => (
+          {models && models.map((model) => (
             <CarouselItem
               key={model.id}
               className="flex flex-col overflow-hidden w-screen h-[90vh]"
