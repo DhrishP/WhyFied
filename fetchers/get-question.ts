@@ -1,9 +1,13 @@
 "use server"
-import { currentUser } from "@/lib/auth";
+import {auth} from '@/auth'
 import { prisma } from "@/lib/prisma";
 
 export default async function GetQuestion() {
-  const user = await currentUser();
+  const session = await auth()
+  if (!session) {
+    return null
+  }
+  const user = session.user
   if (!user) {
     return null
   }
