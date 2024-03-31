@@ -1,4 +1,4 @@
-
+"use server"
 import { currentUser } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
