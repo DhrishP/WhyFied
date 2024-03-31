@@ -1,30 +1,18 @@
 
 import {auth} from '@/auth'
 import { prisma } from "@/lib/prisma";
+import { $Enums } from '@prisma/client';
 
-export default async function GetQuestion() {
+export default async function GetQuestion(difficulty:$Enums.Difficulty, type:$Enums.Types) {
   const session = await auth()
   if (!session) {
     return null
   }
   const user = session.user
-  if (!user) {
-    return null
-  }
-  const getDifficulty = await prisma.preferences.findFirst({
-    where: {
-      userId: user.id,
-    },
-    select: {
-      difficulty: true,
-      type: true,
-    },
-  });
-  if (!getDifficulty?.difficulty || !getDifficulty?.type) throw new Error("Difficulty not found");
   const res = await prisma.getQuestion.findMany({
     where: {
-      difficulty: getDifficulty.difficulty,
-      type: getDifficulty.type,
+      difficulty,
+      type
     },
     orderBy:{
       updatedAt: 'asc'
