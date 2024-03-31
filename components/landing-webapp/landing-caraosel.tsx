@@ -3,12 +3,11 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNextButton,
+
 } from "@/components/ui/carousel";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import { LoginButton } from "../auth/login-button";
-import FirstBgComp from "../backgroundComponents/first";
 import NeoButton from "../ui/neo-brutalist/button";
 
 const Carasoul = () => {
@@ -41,14 +40,13 @@ const Carasoul = () => {
         <CarouselItem className=" w-screen bg-slate-50 relative h-screen flex flex-col space-y-4 items-center justify-center">
          
           <Image
-            className=""
             src={"/images/nei.jpg"}
             alt={""}
             width={300}
             height={300}
           />
           <div className="absolute w-screen items-center  bottom-10 flex flex-col space-y-10">
-            <h2 className="font-bold mx-10 ">"He who has a WHY can bear anyhow" - nietzche</h2>
+            <h2 className="font-bold mx-10 ">&quot;He who has a WHY can bear anyhow&quot; - nietzche</h2>
             <div className="space-x-2  flex">
               <div className={`bg-black rounded-full w-3 h-3`}></div>
               <div className={`bg-pink-300 rounded-full w-4 h-3`}></div>
