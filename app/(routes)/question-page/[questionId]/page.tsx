@@ -113,6 +113,7 @@ const QuestionIdPage = ({ params }: { params: { questionId: string } }) => {
             <h4>Rewards:</h4>
             <h1 className="font-bold text-xl">+500 coins🪙</h1>
             <h1 className="font-bold text-xl">+1 streak🔥</h1>
+            <h1 className="font-bold text-xl">+3 prompt tokense⚡</h1>
           </div>
         </DialogContent>
       </Dialog>

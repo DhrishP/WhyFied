@@ -47,6 +47,7 @@ export async function POST(req: Request) {
       data: {
         Streak: user.Streak + 1,
         coins: user.coins + 500,
+        promptTokes: user.promptTokes + 3,
       },
     });
     if (!res2) {
