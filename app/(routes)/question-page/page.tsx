@@ -24,7 +24,6 @@ const QuestionPage = async () => {
   if (!getDifficulty) {
     redirect("/preferences-slider");
   }
-
   const IsAlreadyAns = await prisma.savequestionTimeStamps.findFirst({
     where: {
       timestamp: new Date().toLocaleDateString(),
@@ -39,11 +38,7 @@ const QuestionPage = async () => {
     getDifficulty.type
   );
   if (!getQuestion) {
-    return (
-      <div className="animate-pulse text-6xl font-extrabold text-center h-screen">
-        Something went wrong , please try again later
-      </div>
-    );
+    return notFound();
   }
   return (
     <>
