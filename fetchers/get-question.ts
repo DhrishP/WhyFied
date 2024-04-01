@@ -18,17 +18,5 @@ export default async function GetQuestion(difficulty:$Enums.Difficulty, type:$En
       updatedAt: 'asc'
     }
   });
-  const res2 = await prisma.userQuestion.findMany({
-    where: {
-      userId: user.id,
-    },
-    include: {
-      getQuestion: true,
-    },
-  });
-  if(res2.length === 0) return res.slice(0, 3);
-  const userQuestions = res2.map((x) => x.getQuestion);
-  const finalRes = res.filter((x) => !userQuestions.includes(x)).slice(0, 3);
-
-  return finalRes;
+  return res.slice(0,3)
 }

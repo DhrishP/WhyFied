@@ -20,7 +20,7 @@ model User {
   createdAt             DateTime               @default(now())
   isTwoFactorEnabled    Boolean                @default(false)
   Streak                Int                    @default(0)
-  promptTokes           Int                    @default(1)
+  promptTokes           Int                    @default(3)
   accounts              Account[]
   Achievement           Achievement[]
   JournalEntries        JournalEntries[]
@@ -219,7 +219,7 @@ enum Types {
 }
 
 enum ModelName {
-  Krishna
+  Abraham
   Marcus
   Albert
   Ayn
