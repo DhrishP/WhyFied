@@ -12,16 +12,6 @@ const QuestionPage = async () => {
     redirect("/auth/login");
   }
   const user = session.user;
-
-  const IsAlreadyAns = await prisma.savequestionTimeStamps.findFirst({
-    where: {
-      timestamp: new Date().toLocaleDateString(),
-      isAnswered: true,
-    },
-  });
-  if (IsAlreadyAns) {
-    return <DisplayQuestionAns />;
-  }
   const getDifficulty = await prisma.preferences.findFirst({
     where: {
       userId: user.id,
@@ -32,7 +22,17 @@ const QuestionPage = async () => {
     },
   });
   if (!getDifficulty) {
-    return notFound();
+    redirect("/preferences-slider");
+  }
+
+  const IsAlreadyAns = await prisma.savequestionTimeStamps.findFirst({
+    where: {
+      timestamp: new Date().toLocaleDateString(),
+      isAnswered: true,
+    },
+  });
+  if (IsAlreadyAns) {
+    return <DisplayQuestionAns />;
   }
   const getQuestion = await GetQuestion(
     getDifficulty.difficulty,
