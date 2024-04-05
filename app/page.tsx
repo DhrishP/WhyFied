@@ -112,7 +112,7 @@ export default function Home() {
             disabled={isPending}
             size="sm"
             buttonText="Submit"
-            color="lime"
+            color="black"
           />
         </form>
       </div>

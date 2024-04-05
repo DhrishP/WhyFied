@@ -17,7 +17,7 @@ const DisplayQuestionAns = () => {
           <NeoButton
             className="w-5/6"
             buttonText="Talk to Models🤖"
-            color="lime"
+            color="black"
           />
         </Link>
         <Link href={"/journal"}>

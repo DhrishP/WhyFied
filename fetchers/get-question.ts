@@ -8,7 +8,6 @@ export default async function GetQuestion(difficulty:$Enums.Difficulty, type:$En
   if (!session) {
     return null
   }
-  const user = session.user
   const res = await prisma.getQuestion.findMany({
     where: {
       difficulty,

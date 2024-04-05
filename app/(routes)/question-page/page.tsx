@@ -26,6 +26,7 @@ const QuestionPage = async () => {
   }
   const IsAlreadyAns = await prisma.savequestionTimeStamps.findFirst({
     where: {
+      userId:user.id,
       timestamp: new Date().toLocaleDateString(),
       isAnswered: true,
     },

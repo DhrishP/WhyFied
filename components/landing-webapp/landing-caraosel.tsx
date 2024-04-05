@@ -3,7 +3,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-
 } from "@/components/ui/carousel";
 import { Button } from "../ui/button";
 import Image from "next/image";
@@ -31,32 +30,27 @@ const Carasoul = () => {
               question per day{" "}
             </h2>
             <div className="space-x-2  flex">
-              <div className={`bg-pink-300 rounded-full w-4 h-3`}></div>
+              <div className={`bg-gray-200 rounded-full w-4 h-3`}></div>
               <div className={`bg-black rounded-full w-3 h-3`}></div>
               <div className={`bg-black rounded-full w-3 h-3`}></div>
             </div>
           </div>
         </CarouselItem>
         <CarouselItem className=" w-screen bg-slate-50 relative h-screen flex flex-col space-y-4 items-center justify-center">
-         
-          <Image
-            src={"/images/nei.jpg"}
-            alt={""}
-            width={300}
-            height={300}
-          />
+          <Image src={"/images/nei.jpg"} alt={""} width={300} height={300} />
           <div className="absolute w-screen items-center  bottom-10 flex flex-col space-y-10">
-            <h2 className="font-bold mx-10 ">&quot;He who has a WHY can bear anyhow&quot; - nietzche</h2>
+            <h2 className="font-bold mx-10 ">
+              &quot;He who has a WHY can bear anyhow&quot; - nietzche
+            </h2>
             <div className="space-x-2  flex">
               <div className={`bg-black rounded-full w-3 h-3`}></div>
-              <div className={`bg-pink-300 rounded-full w-4 h-3`}></div>
+              <div className={`bg-gray-200 rounded-full w-4 h-3`}></div>
               <div className={`bg-black rounded-full w-3 h-3`}></div>
             </div>
           </div>
         </CarouselItem>
 
         <CarouselItem className="flex-col bg-slate- relative space-y-4 w-screen h-screen flex items-center justify-center">
-       
           <Image
             className=""
             src={"/images/qlogo.jpg"}
@@ -69,13 +63,13 @@ const Carasoul = () => {
               <NeoButton
                 buttonText="Get Started Thinking!!"
                 className="w-5/6"
-                color="pink"
+                color="black"
               />
             </LoginButton>
             <div className="space-x-2  flex">
               <div className={`bg-black rounded-full w-3 h-3`}></div>
               <div className={`bg-black rounded-full w-3 h-3`}></div>
-              <div className={`bg-pink-300 rounded-full w-4 h-3`}></div>
+              <div className={`bg-gray-200 rounded-full w-4 h-3`}></div>
             </div>
           </div>
         </CarouselItem>

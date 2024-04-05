@@ -140,7 +140,7 @@ const QuestionIdPage = ({ params }: { params: { questionId: string } }) => {
                 onClick={handleAddPerspective}
                 buttonText="+Add perspective"
                 type="button"
-                color="lime"
+                color="black"
                 className=" font-semibold self-center text-center  "
               />
             </div>

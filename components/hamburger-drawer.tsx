@@ -31,15 +31,17 @@ const HamburgerDrawer = () => {
             <div className="flex flex-col items-center space-y-3 p-4">
               <Link
                 className={`${
-                  location === "/question-page" ? "bg-gray-700" : "bg-lime-200"
+                  location === "/question-page"
+                    ? "bg-black text-yellow-500"
+                    : "bg-black text-yellow-500"
                 } py-1 block w-5/6 text-center`}
                 href={"/question-page"}
               >
                 <h2
                   className={`${
                     location === "/question-page"
-                      ? "text-lime-200"
-                      : "text-lime-700"
+                      ? "text-yellow-200"
+                      : "text-gray-100"
                   } `}
                 >
                   Home❔
@@ -47,13 +49,15 @@ const HamburgerDrawer = () => {
               </Link>
               <Link
                 className={`${
-                  location === "/shop" ? "bg-gray-700" : "bg-lime-200"
+                  location === "/shop"
+                    ? "bg-black text-yellow-500"
+                    : "bg-black text-yellow-500"
                 } py-1 block w-5/6 text-center`}
                 href={"/shop"}
               >
                 <h2
                   className={`${
-                    location === "/shop" ? "text-lime-200" : "text-lime-700"
+                    location === "/shop" ? "text-yellow-200" : "text-gray-100"
                   } `}
                 >
                   Shop🗽
@@ -61,13 +65,17 @@ const HamburgerDrawer = () => {
               </Link>
               <Link
                 className={`${
-                  location === "/chatbot" ? "bg-gray-700" : "bg-lime-200"
+                  location === "/chatbot"
+                    ? "bg-black text-yellow-500"
+                    : "bg-black text-yellow-500"
                 } py-1 block w-5/6 text-center`}
                 href={"/chatbot"}
               >
                 <h2
                   className={`${
-                    location === "/chatbot" ? "text-lime-200" : "text-lime-700"
+                    location === "/chatbot"
+                      ? "text-yellow-200"
+                      : "text-gray-100"
                   } `}
                 >
                   Talk to Models🤖
@@ -75,13 +83,17 @@ const HamburgerDrawer = () => {
               </Link>
               <Link
                 className={`${
-                  location === "/journal" ? "bg-gray-700" : "bg-lime-200"
+                  location === "/journal"
+                    ? "bg-black text-yellow-500"
+                    : "bg-black text-yellow-500"
                 } py-1 block w-5/6 text-center`}
                 href={"/journal"}
               >
                 <h2
                   className={`${
-                    location === "/journal" ? "text-lime-200" : "text-lime-700"
+                    location === "/journal"
+                      ? "text-yellow-200"
+                      : "text-gray-100"
                   } `}
                 >
                   Journal📓
@@ -89,13 +101,17 @@ const HamburgerDrawer = () => {
               </Link>
               <Link
                 className={`${
-                  location === "/profile" ? "bg-gray-700" : "bg-lime-200"
+                  location === "/profile"
+                    ? "bg-black text-yellow-500"
+                    : "bg-black text-yellow-500"
                 } py-1 block w-5/6 text-center`}
                 href={"/profile"}
               >
                 <h2
                   className={`${
-                    location === "/profile" ? "text-lime-200" : "text-lime-700"
+                    location === "/profile"
+                      ? "text-yellow-200"
+                      : "text-gray-100"
                   } `}
                 >
                   Profile🅿️
@@ -103,13 +119,17 @@ const HamburgerDrawer = () => {
               </Link>
               <Link
                 className={`${
-                  location === "/settings" ? "bg-gray-700" : "bg-lime-200"
+                  location === "/settings"
+                    ? "bg-black text-yellow-500"
+                    : "bg-black text-yellow-500"
                 } py-1 block w-5/6 text-center`}
                 href={"/settings"}
               >
                 <h2
                   className={`${
-                    location === "/settings" ? "text-lime-200" : "text-lime-700"
+                    location === "/settings"
+                      ? "text-yellow-200"
+                      : "text-gray-100"
                   } `}
                 >
                   Settings⚙️

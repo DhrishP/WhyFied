@@ -289,7 +289,7 @@ const CarouselPreviousButton = React.forwardRef<
       variant={"ghost"}
       className={cn(
         className,
-        "bg-lime-200 hover:bg-lime-300 text-black rounded-none"
+        "bg-gray-200 hover:bg-gray-800 text-black rounded-none"
       )}
       onClick={scrollPrev}
       {...props}
@@ -314,7 +314,7 @@ const CarouselNextButton2 = React.forwardRef<
         ` ${
           buttonText === "Calendar"
             ? "bg-purple-300 hover:hover-purple-400"
-            : "bg-lime-200 hover:bg-lime-300 w-5/6 py-5"
+            : "bg-gray-200 hover:bg-gray-800 w-5/6 py-5"
         }    text-black rounded-none`
       )}
       onClick={scrollNext}

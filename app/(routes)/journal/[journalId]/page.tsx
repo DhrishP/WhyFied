@@ -41,7 +41,7 @@ const JournalIdPage = async ({
               </h1>
               {entry.perspective1}
               {entry.perspective2 && (
-                <CarouselNext className="absolute top-[30vh] bg-lime-300 hover:bg-lime-400 right-2" />
+                <CarouselNext className="absolute top-[30vh] bg-gray-800 hover:bg-gray-900 right-2" />
               )}
             </CarouselItem>
             <CarouselItem className="text-gray-700 px-10 relative overflow-y-scroll">
@@ -49,9 +49,9 @@ const JournalIdPage = async ({
                 Perspective 2
               </h1>
               {entry.perspective2}
-              <CarouselPrevious className="absolute top-[30vh] bg-lime-300 hover:bg-lime-400 left-5 text-gray-700" />
+              <CarouselPrevious className="absolute top-[30vh] bg-gray-800 hover:bg-gray-900 left-5 text-gray-700" />
               {entry.perspective3 && (
-                <CarouselNext className="absolute top-[30vh] bg-lime-300 hover:bg-lime-400 right-2" />
+                <CarouselNext className="absolute top-[30vh] bg-gray-800 hover:bg-gray-900 right-2" />
               )}
             </CarouselItem>
             {entry.perspective3 && (
@@ -60,9 +60,9 @@ const JournalIdPage = async ({
                   Perspective 3
                 </h1>
                 {entry.perspective3}
-                <CarouselPrevious className="absolute top-[30vh] bg-lime-300 hover:bg-lime-400 left-5 text-gray-700" />
+                <CarouselPrevious className="absolute top-[30vh] bg-gray-800 hover:bg-gray-900 left-5 text-gray-700" />
                 {entry.perspective4 && (
-                  <CarouselNext className="absolute top-[30vh] bg-lime-300 hover:bg-lime-400 right-2" />
+                  <CarouselNext className="absolute top-[30vh] bg-gray-800 hover:bg-gray-900 right-2" />
                 )}
               </CarouselItem>
             )}
@@ -72,9 +72,9 @@ const JournalIdPage = async ({
                   Perspective 4
                 </h1>
                 {entry.perspective4}
-                <CarouselPrevious className="absolute top-[30vh] bg-lime-300 hover:bg-lime-400 left-5 text-gray-700" />
+                <CarouselPrevious className="absolute top-[30vh] bg-gray-800 hover:bg-gray-900 left-5 text-gray-700" />
                 {entry.perspective5 && (
-                  <CarouselNext className="absolute top-[30vh] bg-lime-300 hover:bg-lime-400 right-2" />
+                  <CarouselNext className="absolute top-[30vh] bg-gray-800 hover:bg-gray-900 right-2" />
                 )}
               </CarouselItem>
             )}
@@ -84,7 +84,7 @@ const JournalIdPage = async ({
                   Perspective 5
                 </h1>
                 {entry.perspective5}
-                <CarouselPrevious className="absolute top-[30vh] bg-lime-300 hover:bg-lime-400 left-5 text-gray-700" />
+                <CarouselPrevious className="absolute top-[30vh] bg-gray-800 hover:bg-gray-900 left-5 text-gray-700" />
               </CarouselItem>
             )}
           </CarouselContent>

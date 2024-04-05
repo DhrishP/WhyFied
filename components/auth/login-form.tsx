@@ -25,9 +25,6 @@ import { login } from "@/actions/login";
 import NeoButton from "../ui/neo-brutalist/button";
 
 export const LoginForm = () => {
-
- 
-
   const [showTwoFactor, setShowTwoFactor] = useState(false);
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -149,10 +146,10 @@ export const LoginForm = () => {
           <FormError message={error} />
           <FormSuccess message={success} />
           <NeoButton
-            color="lime"
+            color="black"
             buttonText={showTwoFactor ? "Confirm" : "Login"}
             type="submit"
-            className="w-full bg-lime-300 hover:bg-lime-400"
+            className="w-full bg-gray-800 hover:bg-gray-900"
             disabled={isPending}
           />
         </form>

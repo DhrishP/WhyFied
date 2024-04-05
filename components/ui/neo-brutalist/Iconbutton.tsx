@@ -26,7 +26,7 @@ const IconButton = ({
             color === "violet" && !disabled,
         },
         {
-          "bg-pink-200 hover:bg-pink-300 active:bg-pink-400":
+          "bg-pink-200 hover:bg-gray-200 active:bg-pink-400":
             color === "pink" && !disabled,
         },
         {
@@ -42,7 +42,7 @@ const IconButton = ({
             color === "yellow" && !disabled,
         },
         {
-          "bg-lime-200 hover:bg-lime-300 active:bg-lime-400":
+          "bg-gray-200 hover:bg-gray-800 active:bg-lime-400":
             color === "lime" && !disabled,
         },
         {

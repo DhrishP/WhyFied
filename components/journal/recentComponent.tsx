@@ -19,7 +19,7 @@ const RecentJournalComponent = ({
             className="flex items-start space-x-4 cursor-pointer"
           >
             <CircleIcon className="text-purple-400" />
-            <div className="flex-1 p-4 border rounded bg-lime-300">
+            <div className="flex-1 p-4 border rounded bg-gray-800">
               <h3 className="font-semibold text-gray-700 capitalize">
                 {entry.getQuestion.question}
               </h3>

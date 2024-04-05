@@ -158,7 +158,7 @@ export default function Component() {
           }}
           size="sm"
           buttonText="Clear"
-          color={"lime"}
+          color={"black"}
         />
       </header>
       <div
@@ -237,7 +237,7 @@ export default function Component() {
               )}
               {!blockSubmit && (
                 <NeoButton
-                  color="lime"
+                  color="black"
                   type="submit"
                   buttonText="Send"
                   disabled={loading}

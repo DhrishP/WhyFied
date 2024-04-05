@@ -1,6 +1,6 @@
 import { useState } from "react";
 import classNames from "classnames";
-import Link from "next/link"
+import Link from "next/link";
 
 type DropdownType = {
   title: string;
@@ -20,11 +20,11 @@ const DropDown = ({ title, list, color = "lime", className }: DropdownType) => {
             className={classNames(
               "inline-flex w-72 justify-center gap-x-1.5 px-3 py-2 border-black border-2 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)]",
               { "bg-violet-200 hover:bg-violet-300": color === "violet" },
-              { "bg-pink-200 hover:bg-pink-300": color === "pink" },
+              { "bg-pink-200 hover:bg-gray-200": color === "pink" },
               { "bg-red-200 hover:bg-red-300": color === "red" },
               { "bg-orange-200 hover:bg-orange-300": color === "orange" },
               { "bg-yellow-200 hover:bg-yellow-300": color === "yellow" },
-              { "bg-lime-200 hover:bg-lime-300": color === "lime" },
+              { "bg-gray-200 hover:bg-gray-800": color === "lime" },
               { "bg-cyan-200 hover:bg-cyan-300": color === "cyan" },
               className
             )}
@@ -71,7 +71,7 @@ const DropDown = ({ title, list, color = "lime", className }: DropdownType) => {
                     { "hover:bg-orange-200": color === "orange" },
                     { "hover:bg-yellow-200": color === "yellow" },
                     { "hover:bg-yellow-200": color === "yellow" },
-                    { "hover:bg-lime-200": color === "lime" },
+                    { "hover:bg-gray-200": color === "lime" },
                     { "hover:bg-cyan-200": color === "cyan" }
                   )}
                   role="menuitem"

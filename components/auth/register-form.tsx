@@ -13,9 +13,9 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,  
+  FormMessage,
 } from "@/components/ui/form";
-import { CardWrapper } from "@/components/auth/card-wrapper"
+import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
@@ -39,13 +39,12 @@ export const RegisterForm = () => {
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
     setError("");
     setSuccess("");
-    
+
     startTransition(() => {
-      register(values)
-        .then((data) => {
-          setError(data.error);
-          setSuccess(data.success);
-        });
+      register(values).then((data) => {
+        setError(data.error);
+        setSuccess(data.success);
+      });
     });
   };
 
@@ -57,10 +56,7 @@ export const RegisterForm = () => {
       showSocial
     >
       <Form {...form}>
-        <form 
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-4">
             <FormField
               control={form.control}
@@ -70,7 +66,7 @@ export const RegisterForm = () => {
                   <FormLabel>Name</FormLabel>
                   <FormControl>
                     <Input
-                    className="bg-secondary color-primary"
+                      className="bg-secondary color-primary"
                       {...field}
                       disabled={isPending}
                       placeholder="John Doe"
@@ -88,7 +84,7 @@ export const RegisterForm = () => {
                   <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input
-                    className="bg-secondary color-primary"
+                      className="bg-secondary color-primary"
                       {...field}
                       disabled={isPending}
                       placeholder="john.doe@example.com"
@@ -107,7 +103,7 @@ export const RegisterForm = () => {
                   <FormLabel>Password</FormLabel>
                   <FormControl>
                     <Input
-                    className="bg-secondary color-primary"
+                      className="bg-secondary color-primary"
                       {...field}
                       disabled={isPending}
                       placeholder="******"
@@ -122,10 +118,10 @@ export const RegisterForm = () => {
           <FormError message={error} />
           <FormSuccess message={success} />
           <NeoButton
-            color="lime"
+            color="black"
             buttonText={"Create an account"}
             type="submit"
-            className="w-full bg-lime-300 hover:bg-lime-400"
+            className="w-full bg-gray-800 hover:bg-gray-900"
             disabled={isPending}
           />
         </form>

@@ -31,7 +31,7 @@ const NeoInput = ({
         { "focus:bg-red-200": focusColor === "red" },
         { "focus:bg-orange-200": focusColor === "orange" },
         { "focus:bg-yellow-200": focusColor === "yellow" },
-        { "focus:bg-lime-200": focusColor === "lime" },
+        { "focus:bg-gray-200": focusColor === "lime" },
         { "focus:bg-cyan-200": focusColor === "cyan" },
         { "rounded-none": rounded === "none" },
         { "rounded-md": rounded === "md" },

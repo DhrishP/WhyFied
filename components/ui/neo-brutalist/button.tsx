@@ -5,12 +5,21 @@ type ButtonType = {
   buttonText: string;
   rounded?: "none" | "md" | "full";
   size?: "sm" | "md" | "lg";
-  color?: "violet" | "pink" | "red" | "orange" | "yellow" | "lime" | "cyan";
+  color?:
+    | "violet"
+    | "pink"
+    | "red"
+    | "orange"
+    | "yellow"
+    | "lime"
+    | "cyan"
+    | "black"
+    | "gray";
   disabled?: boolean;
   className?: string;
   onClick?: () => void;
-  type?: "submit" | "reset" | "button" | undefined,
-  shouldshowCoin?: boolean
+  type?: "submit" | "reset" | "button" | undefined;
+  shouldshowCoin?: boolean;
 };
 
 const NeoButton = ({
@@ -22,7 +31,7 @@ const NeoButton = ({
   className,
   onClick,
   type,
-  shouldshowCoin=false
+  shouldshowCoin = false,
 }: ButtonType) => {
   return (
     <button
@@ -35,7 +44,7 @@ const NeoButton = ({
             color === "violet" && !disabled,
         },
         {
-          "bg-pink-200 hover:bg-pink-300 active:bg-pink-400":
+          "bg-pink-200 hover:bg-gray-200 active:bg-pink-400":
             color === "pink" && !disabled,
         },
         {
@@ -51,8 +60,16 @@ const NeoButton = ({
             color === "yellow" && !disabled,
         },
         {
-          "bg-lime-200 hover:bg-lime-300 active:bg-lime-400":
+          "bg-gray-200 hover:bg-gray-800 active:bg-lime-400":
             color === "lime" && !disabled,
+        },
+        {
+          "bg-gray-800 hover:bg-gray-900 text-yellow-100 border border-white active:bg-gray-900":
+            color === "black" && !disabled,
+        },
+        {
+          "bg-gray-200 hover:bg-gray-300 active:bg-gray-400":
+            color === "gray" && !disabled,
         },
         {
           "bg-cyan-200 hover:bg-cyan-300 active:bg-cyan-400":
@@ -69,7 +86,10 @@ const NeoButton = ({
           "h-12 px-5 shadow-[2px_2px_0px_rgba(0,0,0,1)] hover:border-b-[1px]":
             size === "md",
         },
-        { "h-14 px-5 shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:border-b-[1px]": size === "lg" },
+        {
+          "h-14 px-5 shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:border-b-[1px]":
+            size === "lg",
+        },
         {
           "border-[#727272] bg-[#D4D4D4] text-[#676767] hover:bg-[#D4D4D4] hover:shadow-none active:bg-[#D4D4D4]":
             disabled,
@@ -79,9 +99,8 @@ const NeoButton = ({
       disabled={disabled}
       type={type}
     >
-      
       <h3>{buttonText}</h3>
-      {shouldshowCoin? <CoinImage height={20} width={20}/> : null}
+      {shouldshowCoin ? <CoinImage height={20} width={20} /> : null}
     </button>
   );
 };

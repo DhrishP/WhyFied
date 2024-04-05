@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 const OptionsCaraosel = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [isActive, setIsActive] = React.useState({
     easy: false,
     intermediate: false,
@@ -106,7 +106,7 @@ const OptionsCaraosel = () => {
     });
     if (response.status === 200) {
       toast.success("Preferences added");
-      router.push('/question-page')
+      router.push("/question-page");
     } else {
       toast.error("Something went wrong");
     }
@@ -129,7 +129,7 @@ const OptionsCaraosel = () => {
           ))}
           <div className="flex w-full relative top-28 flex-col space-y-4 items-center justify-center">
             <div className="space-x-2 flex">
-              <div className={`bg-lime-300 rounded-full w-4 h-3`}></div>
+              <div className={`bg-gray-800 rounded-full w-4 h-3`}></div>
               <div className={`bg-black rounded-full w-3 h-3`}></div>
             </div>
             <CarouselNextButton2 className="w-full" buttonText="Next" />
@@ -153,11 +153,11 @@ const OptionsCaraosel = () => {
           <div className="  flex w-full relative top-40 flex-col space-y-4 items-center justify-center">
             <div className="space-x-2 flex">
               <div className={`bg-black rounded-full w-3 h-3`}></div>
-              <div className={`bg-lime-300 rounded-full w-4 h-3`}></div>
+              <div className={`bg-gray-800 rounded-full w-4 h-3`}></div>
             </div>
             <NeoButton
               onClick={onSubmit}
-              color="lime"
+              color="black"
               rounded="md"
               buttonText="Let's Start Thinking"
             />

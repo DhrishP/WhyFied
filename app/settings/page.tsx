@@ -190,10 +190,10 @@ const SettingsPage = () => {
               </Button>
             </div>
             <NeoButton
-              color="lime"
+              color="black"
               buttonText={"Save"}
               type="submit"
-              className="w-full bg-lime-300 hover:bg-lime-400"
+              className="w-full bg-gray-800 hover:bg-gray-900"
               disabled={isPending}
             />
           </form>

@@ -23,20 +23,22 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import HamburgerDrawer from "../hamburger-drawer";
 type ShopComponentProps = {
-  models: {
-    id: string;
-    name: $Enums.ModelName;
-    fullName: string;
-    shopdescription: string;
-    description: string;
-    searchPrompt: string | null;
-    price: number;
-    ImageUrl: string;
-    HeadImageUrl: string | null;
-    Sarcasm: number | null;
-    EaseToUnderstand: number | null;
-    ContextSensitivity: number | null;
-  }[] | null; 
+  models:
+    | {
+        id: string;
+        name: $Enums.ModelName;
+        fullName: string;
+        shopdescription: string;
+        description: string;
+        searchPrompt: string | null;
+        price: number;
+        ImageUrl: string;
+        HeadImageUrl: string | null;
+        Sarcasm: number | null;
+        EaseToUnderstand: number | null;
+        ContextSensitivity: number | null;
+      }[]
+    | null;
 };
 
 const ShopComponent = ({ models }: ShopComponentProps) => {
@@ -85,7 +87,7 @@ const ShopComponent = ({ models }: ShopComponentProps) => {
             <NeoButton
               buttonText="Talk to Model"
               className="w-3/4"
-              color="lime"
+              color="black"
               onClick={() => {
                 router.push("/chatbot");
               }}
@@ -109,60 +111,61 @@ const ShopComponent = ({ models }: ShopComponentProps) => {
       </header>
       <Carousel>
         <CarouselContent>
-          {models && models.map((model) => (
-            <CarouselItem
-              key={model.id}
-              className="flex flex-col overflow-hidden w-screen h-[90vh]"
-            >
-              <div className="h-3/4  flex-col w-[95vw] overflow-hidden flex items-center justify-center">
-                <img
-                  src={model.ImageUrl}
-                  alt={model.name}
-                  width={300}
-                  height={300}
-                  loading="lazy"
-                  className="rounded-full"
-                />
-                <h2 className="font-semibold">{model.name}</h2>
-              </div>
-              <DrawerComponent
-                className="h-1/4 w-[90vw] flex items-center justify-center"
-                buttonText={model.price.toString()}
-                description=""
-                title="YOU SURELY WANT TO BUY THIS MODEL?"
+          {models &&
+            models.map((model) => (
+              <CarouselItem
+                key={model.id}
+                className="flex flex-col overflow-hidden w-screen h-[90vh]"
               >
-                <div className="h-[30vh] flex mt-2 ">
-                  <div className="flex w-1/2 items-center ">
-                    <Image
-                      src={model.ImageUrl}
-                      alt={model.name}
-                      width={200}
-                      height={200}
-                    />
-                    <div className="absolute bottom-0 left-0 transform translate-y-1/2 w-full h-1/2 bg-gradient-to-t from-slate-300 to-transparent rounded-full opacity-80 z-20 "></div>
-                  </div>
-                  <div className="flex w-1/2 flex-col ">
-                    <h2 className=" text-center font-bold  text-lg">
-                      {model.fullName}
-                    </h2>
-                    <h4 className="font-desc text-center text-sm my-2">
-                      {model.shopdescription}
-                    </h4>
-                    <NeoButton
-                      disabled={loading}
-                      buttonText="Buy Now"
-                      color="lime"
-                      className="w-[80%] mt-4 self-center"
-                      onClick={() => {
-                        onSubmit(model.id, model.price);
-                      }}
-                    />
-                  </div>
+                <div className="h-3/4  flex-col w-[95vw] overflow-hidden flex items-center justify-center">
+                  <img
+                    src={model.ImageUrl}
+                    alt={model.name}
+                    width={300}
+                    height={300}
+                    loading="lazy"
+                    className="rounded-full"
+                  />
+                  <h2 className="font-semibold">{model.name}</h2>
                 </div>
-              </DrawerComponent>
-              ;
-            </CarouselItem>
-          ))}
+                <DrawerComponent
+                  className="h-1/4 w-[90vw] flex items-center justify-center"
+                  buttonText={model.price.toString()}
+                  description=""
+                  title="YOU SURELY WANT TO BUY THIS MODEL?"
+                >
+                  <div className="h-[30vh] flex mt-2 ">
+                    <div className="flex w-1/2 items-center ">
+                      <Image
+                        src={model.ImageUrl}
+                        alt={model.name}
+                        width={200}
+                        height={200}
+                      />
+                      <div className="absolute bottom-0 left-0 transform translate-y-1/2 w-full h-1/2 bg-gradient-to-t from-slate-300 to-transparent rounded-full opacity-80 z-20 "></div>
+                    </div>
+                    <div className="flex w-1/2 flex-col ">
+                      <h2 className=" text-center font-bold  text-lg">
+                        {model.fullName}
+                      </h2>
+                      <h4 className="font-desc text-center text-sm my-2">
+                        {model.shopdescription}
+                      </h4>
+                      <NeoButton
+                        disabled={loading}
+                        buttonText="Buy Now"
+                        color="black"
+                        className="w-[80%] mt-4 self-center"
+                        onClick={() => {
+                          onSubmit(model.id, model.price);
+                        }}
+                      />
+                    </div>
+                  </div>
+                </DrawerComponent>
+                ;
+              </CarouselItem>
+            ))}
         </CarouselContent>
       </Carousel>
     </>
