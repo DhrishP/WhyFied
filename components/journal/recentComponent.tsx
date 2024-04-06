@@ -19,11 +19,11 @@ const RecentJournalComponent = ({
             className="flex items-start space-x-4 cursor-pointer"
           >
             <CircleIcon className="text-purple-400" />
-            <div className="flex-1 p-4 border rounded bg-gray-800">
-              <h3 className="font-semibold text-gray-700 capitalize">
+            <div className="flex-1 p-4 border rounded bg-gray-900">
+              <h3 className="font-semibold text-yellow-600 capitalize">
                 {entry.getQuestion.question}
               </h3>
-              <p className="mt-2 text-gray-600">{entry.perspective1}</p>
+              <p className="mt-2 text-slate-300">{entry.perspective1}</p>
               {entry.perspective5 && (
                 <p className="mt-4 text-sm text-gray-700 font-semibold bg-violet-300">
                   Goal/Small win: {entry.perspective5}

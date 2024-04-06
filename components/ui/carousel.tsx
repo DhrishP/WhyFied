@@ -264,7 +264,7 @@ const CarouselNextButton = React.forwardRef<
         className,
         ` ${
           buttonText === "Calendar"
-            ? "bg-purple-300 hover:hover-purple-400"
+            ? "bg-yellow-300 hover:hover-purple-400"
             : "bg-yellow-200 hover:bg-yellow-300"
         }    text-black rounded-none`
       )}

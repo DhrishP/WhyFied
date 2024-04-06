@@ -11,7 +11,7 @@ const DisplayQuestionAns = () => {
       </h3>
       <div className="h-1/3 relative flex flex-col w-full space-y-4 bottom-0">
         <Link href="/shop">
-          <NeoButton className="w-5/6" buttonText="Shop🛒" color="violet" />
+          <NeoButton className="w-5/6" buttonText="Shop🛒" color="gray" />
         </Link>
         <Link href="/chatbot">
           <NeoButton

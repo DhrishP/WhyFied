@@ -82,7 +82,7 @@ export function CalendarComponent() {
         onDayClick={(day: Date) => {
           onselect(day);
         }}
-        className={`rounded-md border w-3/4  h-3/4 bg-purple-200`}
+        className={`rounded-md border w-3/4  h-3/4 bg-yellow-300`}
       />
     </div>
   );

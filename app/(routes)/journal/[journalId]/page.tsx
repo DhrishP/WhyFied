@@ -36,55 +36,55 @@ const JournalIdPage = async ({
         <Carousel className="h-full">
           <CarouselContent className="h-[80vh] bg-slate-100 ">
             <CarouselItem className="text-gray-700 px-10 relative overflow-y-scroll">
-              <h1 className="text-4xl mb-7 text-lime-400 font-bold">
+              <h1 className="text-4xl mb-7 text-yellow-500 font-bold">
                 Perspective 1
               </h1>
               {entry.perspective1}
               {entry.perspective2 && (
-                <CarouselNext className="absolute top-[30vh] bg-gray-800 hover:bg-gray-900 right-2" />
+                <CarouselNext className="absolute top-[30vh] bg-gray-200 hover:bg-gray-900 right-2" />
               )}
             </CarouselItem>
             <CarouselItem className="text-gray-700 px-10 relative overflow-y-scroll">
-              <h1 className="text-4xl mb-7 text-lime-400 font-bold">
+              <h1 className="text-4xl mb-7 text-yellow-500 font-bold">
                 Perspective 2
               </h1>
               {entry.perspective2}
-              <CarouselPrevious className="absolute top-[30vh] bg-gray-800 hover:bg-gray-900 left-5 text-gray-700" />
+              <CarouselPrevious className="absolute top-[30vh] bg-gray-200 hover:bg-gray-900 left-5 text-gray-700" />
               {entry.perspective3 && (
-                <CarouselNext className="absolute top-[30vh] bg-gray-800 hover:bg-gray-900 right-2" />
+                <CarouselNext className="absolute top-[30vh] bg-gray-200 hover:bg-gray-900 right-2" />
               )}
             </CarouselItem>
             {entry.perspective3 && (
               <CarouselItem className="text-gray-700 px-10 relative overflow-y-scroll">
-                <h1 className="text-4xl mb-7 text-lime-400 font-bold">
+                <h1 className="text-4xl mb-7 text-yellow-500 font-bold">
                   Perspective 3
                 </h1>
                 {entry.perspective3}
-                <CarouselPrevious className="absolute top-[30vh] bg-gray-800 hover:bg-gray-900 left-5 text-gray-700" />
+                <CarouselPrevious className="absolute top-[30vh] bg-gray-200 hover:bg-gray-900 left-5 text-gray-700" />
                 {entry.perspective4 && (
-                  <CarouselNext className="absolute top-[30vh] bg-gray-800 hover:bg-gray-900 right-2" />
+                  <CarouselNext className="absolute top-[30vh] bg-gray-200 hover:bg-gray-900 right-2" />
                 )}
               </CarouselItem>
             )}
             {entry.perspective4 && (
               <CarouselItem className="text-gray-700 relative px-10  overflow-y-scroll">
-                <h1 className="text-4xl mb-7 text-lime-400 font-bold">
+                <h1 className="text-4xl mb-7 text-yellow-500 font-bold">
                   Perspective 4
                 </h1>
                 {entry.perspective4}
-                <CarouselPrevious className="absolute top-[30vh] bg-gray-800 hover:bg-gray-900 left-5 text-gray-700" />
+                <CarouselPrevious className="absolute top-[30vh] bg-gray-200 hover:bg-gray-900 left-5 text-gray-700" />
                 {entry.perspective5 && (
-                  <CarouselNext className="absolute top-[30vh] bg-gray-800 hover:bg-gray-900 right-2" />
+                  <CarouselNext className="absolute top-[30vh] bg-gray-200 hover:bg-gray-900 right-2" />
                 )}
               </CarouselItem>
             )}
             {entry.perspective5 && (
               <CarouselItem className="text-gray-700 relative px-10 overflow-y-scroll">
-                <h1 className="text-4xl mb-7 text-lime-400 font-bold">
+                <h1 className="text-4xl mb-7 text-yellow-500 font-bold">
                   Perspective 5
                 </h1>
                 {entry.perspective5}
-                <CarouselPrevious className="absolute top-[30vh] bg-gray-800 hover:bg-gray-900 left-5 text-gray-700" />
+                <CarouselPrevious className="absolute top-[30vh] bg-gray-200 hover:bg-gray-900 left-5 text-gray-700" />
               </CarouselItem>
             )}
           </CarouselContent>

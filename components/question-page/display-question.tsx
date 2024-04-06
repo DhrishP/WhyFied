@@ -28,7 +28,6 @@ const DisplayQuestion = ({
   return (
     <>
      <FirstBgComp/>
-
       <nav className="flex items-center justify-between px-10 pt-6">
         <div>
           <h2 className=" text-2xl">WHYFIED V1</h2>

@@ -157,7 +157,7 @@ model Preferences {
   userId     String     @unique
   type       Types
   difficulty Difficulty
-  user       User       @relation(fields: [userId], references: [id])
+  user       User       @relation(fields: [userId], references: [id],onDelete: Cascade)
 
   @@unique([type, userId])
 }
@@ -166,7 +166,7 @@ model UserModels {
   userId  String
   modelId String
   model   Model  @relation(fields: [modelId], references: [id])
-  user    User   @relation(fields: [userId], references: [id])
+  user    User   @relation(fields: [userId], references: [id],onDelete: Cascade)
 
   @@id([userId, modelId])
 }
